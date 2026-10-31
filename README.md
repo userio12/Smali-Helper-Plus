@@ -7,7 +7,8 @@
 **The modern, offline Smali & Dalvik bytecode reference for Android developers.**
 
 Every Dalvik opcode explained with real examples, a 28-lesson academy, a validating Smali editor and a full
-developer toolbox, in a Material 3 app built with Kotlin and Jetpack Compose.
+developer toolbox, in a Material 3 app built with Kotlin and Jetpack Compose. Made for Android reverse engineering,
+reading `apktool` / `baksmali` output, and learning how DEX bytecode really works.
 
 [![Android CI](https://github.com/riyadmondol2006/Smali-Helper-Plus/actions/workflows/android-ci.yml/badge.svg)](https://github.com/riyadmondol2006/Smali-Helper-Plus/actions/workflows/android-ci.yml)
 [![Release](https://github.com/riyadmondol2006/Smali-Helper-Plus/actions/workflows/release.yml/badge.svg)](https://github.com/riyadmondol2006/Smali-Helper-Plus/actions/workflows/release.yml)
