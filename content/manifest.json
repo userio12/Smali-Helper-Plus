@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "publishedAt": "2026-10-30T21:59:10Z",
+  "minAppVersionCode": 1,
+  "packages": [
+    {
+      "id": "opcodes",
+      "contentVersion": 1,
+      "url": "https://raw.githubusercontent.com/riyadmondol2006/Smali-Helper-Plus/main/content/opcodes.json",
+      "sha256": "286cc68058089b6e5d23fb580f42a535056fc6d23f57695f12ac16e23aeb084b",
+      "sizeBytes": 664660,
+      "description": "Opcode reference"
+    },
+    {
+      "id": "lessons",
+      "contentVersion": 1,
+      "url": "https://raw.githubusercontent.com/riyadmondol2006/Smali-Helper-Plus/main/content/lessons.json",
+      "sha256": "afd43b5764f7c60e6001a32e2621fde0f1510676552bf9a4688523a0f7960b06",
+      "sizeBytes": 268702,
+      "description": "Lessons, quizzes and flashcards"
+    },
+    {
+      "id": "snippets",
+      "contentVersion": 1,
+      "url": "https://raw.githubusercontent.com/riyadmondol2006/Smali-Helper-Plus/main/content/snippets.json",
+      "sha256": "99608bfeb0441d5ab5e2bf6e0cdb2d8e5e17b90137d8860532cf72500a30d15f",
+      "sizeBytes": 55227,
+      "description": "Built-in snippet library"
+    }
+  ]
+}

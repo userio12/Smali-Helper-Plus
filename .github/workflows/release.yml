@@ -1,0 +1,231 @@
+name: Release
+
+# Publishes a signed GitHub Release automatically for every push to main that passes Android CI.
+#
+# Versioning is automatic (see app/build.gradle.kts and version.properties):
+#   versionName = <major>.<minor>.<commit count - 1>   e.g. 1.0.0, 1.0.1, 1.0.2 ...
+#   versionCode = <commit count>                       always increasing on main
+# Each release is tagged v<versionName> and carries the signed APK, its SHA-256 checksum and build-info.json.
+#
+# Requires the four signing secrets (see SECRETS_SETUP.md). Without them nothing is published and the run summary
+# explains what is missing. Debug builds and tests (android-ci.yml) never need secrets.
+on:
+  workflow_run:
+    workflows: ['Android CI']
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write # create the version tag and the GitHub Release
+
+# Releases run one at a time, in order, and are never cancelled half-way.
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+env:
+  GRADLE_OPTS: -Dorg.gradle.daemon=false -Dkotlin.compiler.execution.strategy=in-process
+  ANDROID_PLATFORM_PACKAGE: platforms;android-37.0
+  ANDROID_BUILD_TOOLS_VERSION: 37.0.0
+
+jobs:
+  release:
+    name: Build and publish signed release
+    # Automatic: only after a successful CI run for a push to main. Manual: only from main.
+    if: >-
+      (github.event_name == 'workflow_run' &&
+       github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.event == 'push') ||
+      (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main')
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      # The exact commit that passed CI (workflow_run), or main's HEAD for a manual run.
+      RELEASE_SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
+    steps:
+      - name: Check out the released commit (full history for the version number)
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ env.RELEASE_SHA }}
+          fetch-depth: 0
+
+      # Secret values are only ever read into environment variables, never printed.
+      - name: Detect signing configuration
+        id: signing
+        env:
+          KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          if [ -n "$KEYSTORE_BASE64" ] && [ -n "$KEYSTORE_PASSWORD" ] && [ -n "$KEY_ALIAS" ] && [ -n "$KEY_PASSWORD" ]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+            echo "All four signing secrets are present."
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            echo "::warning title=Release skipped::The signing secrets are not all set, so no release was published. See SECRETS_SETUP.md."
+          fi
+
+      - name: Set up JDK 21
+        if: steps.signing.outputs.enabled == 'true'
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      # Also validates gradle/wrapper/gradle-wrapper.jar. Release builds only read the cache.
+      - name: Set up Gradle
+        if: steps.signing.outputs.enabled == 'true'
+        uses: gradle/actions/setup-gradle@v6
+        with:
+          cache-read-only: true
+
+      - name: Set up Android SDK (platform 37, build-tools 37.0.0)
+        if: steps.signing.outputs.enabled == 'true'
+        uses: android-actions/setup-android@v4
+        with:
+          packages: platform-tools ${{ env.ANDROID_PLATFORM_PACKAGE }} build-tools;${{ env.ANDROID_BUILD_TOOLS_VERSION }}
+
+      - name: Compute version
+        id: version
+        if: steps.signing.outputs.enabled == 'true'
+        run: |
+          chmod +x gradlew scripts/write-build-info.sh
+          line="$(./gradlew -q printVersion --no-configuration-cache | tail -n 1)"
+          name="$(printf '%s' "$line" | sed -n -E 's/.*versionName=([^ ]+).*/\1/p')"
+          code="$(printf '%s' "$line" | sed -n -E 's/.*versionCode=([0-9]+).*/\1/p')"
+          if [ -z "$name" ] || [ -z "$code" ]; then
+            echo "::error::Could not read the version from ./gradlew printVersion: $line"
+            exit 1
+          fi
+          tag="v$name"
+          {
+            echo "name=$name"
+            echo "code=$code"
+            echo "tag=$tag"
+          } >> "$GITHUB_OUTPUT"
+          if git rev-parse -q --verify "refs/tags/$tag" >/dev/null; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "::notice title=Already released::$tag already exists, nothing to publish."
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "Releasing $tag (versionCode $code) from $RELEASE_SHA"
+          fi
+
+      - name: Decode keystore
+        if: steps.signing.outputs.enabled == 'true' && steps.version.outputs.exists == 'false'
+        env:
+          KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+        run: |
+          umask 077
+          keystore="$RUNNER_TEMP/release.keystore"
+          printf '%s' "$KEYSTORE_BASE64" | base64 -d > "$keystore"
+          echo "ANDROID_KEYSTORE_PATH=$keystore" >> "$GITHUB_ENV"
+
+      # Lint and tests already passed in Android CI for this exact commit.
+      # Passwords are passed through this step's env only; the configuration cache is off so no credential is cached.
+      - name: Assemble signed release APK
+        if: steps.signing.outputs.enabled == 'true' && steps.version.outputs.exists == 'false'
+        env:
+          SMALI_HELPER_REQUIRE_SIGNING: 'true'
+          SMALI_HELPER_GIT_SHA: ${{ env.RELEASE_SHA }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: ./gradlew assembleRelease --stacktrace --no-configuration-cache
+
+      - name: Verify APK signature and stage assets
+        if: steps.signing.outputs.enabled == 'true' && steps.version.outputs.exists == 'false'
+        env:
+          VERSION_NAME: ${{ steps.version.outputs.name }}
+          VERSION_CODE: ${{ steps.version.outputs.code }}
+        run: |
+          apk="app/build/outputs/apk/release/app-release.apk"
+          [ -f "$apk" ] || { echo "::error::Signed release APK not found at $apk"; exit 1; }
+          "$ANDROID_HOME/build-tools/${ANDROID_BUILD_TOOLS_VERSION}/apksigner" verify --verbose --print-certs "$apk" \
+            | grep -E 'Verifies|Number of signers|SHA-256 digest'
+          rm -rf dist
+          mkdir -p dist
+          out="Smali-Helper-Plus-v${VERSION_NAME}.apk"
+          cp "$apk" "dist/$out"
+          (cd dist && sha256sum "$out" > "$out.sha256")
+          cp app/build/outputs/mapping/release/mapping.txt dist/mapping.txt
+          BUILD_COMMIT_SHA="$RELEASE_SHA" BUILD_VARIANT=release BUILD_SIGNED=true scripts/write-build-info.sh dist/build-info.json
+
+      - name: Delete keystore
+        if: always()
+        run: rm -f "$RUNNER_TEMP/release.keystore"
+
+      - name: Publish GitHub Release
+        if: steps.signing.outputs.enabled == 'true' && steps.version.outputs.exists == 'false'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.version.outputs.tag }}
+          VERSION_NAME: ${{ steps.version.outputs.name }}
+          VERSION_CODE: ${{ steps.version.outputs.code }}
+        run: |
+          apk="Smali-Helper-Plus-v${VERSION_NAME}.apk"
+          checksum="$(cut -d' ' -f1 "dist/$apk.sha256")"
+          {
+            echo "## Smali Helper Plus ${VERSION_NAME}"
+            echo
+            echo "| | |"
+            echo "|---|---|"
+            echo "| Version | \`${VERSION_NAME}\` (versionCode ${VERSION_CODE}) |"
+            echo "| Commit | ${RELEASE_SHA} |"
+            echo "| APK | \`${apk}\` |"
+            echo "| SHA-256 | \`${checksum}\` |"
+            echo
+            echo "Download \`${apk}\` below and open it on your Android device (Android 8.0 or newer)."
+            echo "Updates install over the previous version because every release is signed with the same key."
+          } > release-notes.md
+          # The generated changelog (commits/PRs since the previous tag) is appended to the notes above.
+          gh release create "$TAG" \
+            "dist/$apk" "dist/$apk.sha256" dist/build-info.json \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$RELEASE_SHA" \
+            --title "Smali Helper Plus ${VERSION_NAME}" \
+            --notes-file release-notes.md \
+            --generate-notes
+
+      - name: Upload release artifacts
+        if: steps.signing.outputs.enabled == 'true' && steps.version.outputs.exists == 'false'
+        uses: actions/upload-artifact@v7
+        with:
+          name: Smali-Helper-Plus-Release-v${{ steps.version.outputs.name }}
+          path: |
+            dist/*.apk
+            dist/*.sha256
+            dist/mapping.txt
+            dist/build-info.json
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Job summary
+        if: always()
+        env:
+          SIGNING: ${{ steps.signing.outputs.enabled }}
+          EXISTS: ${{ steps.version.outputs.exists }}
+          TAG: ${{ steps.version.outputs.tag }}
+          JOB_STATUS: ${{ job.status }}
+        run: |
+          # shellcheck disable=SC2016 # backticks below are literal Markdown
+          {
+            echo '## Release'
+            echo
+            if [ "$SIGNING" != "true" ]; then
+              echo '**No release was published:** the signing secrets `ANDROID_KEYSTORE_BASE64`, `ANDROID_KEYSTORE_PASSWORD`,'
+              echo '`ANDROID_KEY_ALIAS` and `ANDROID_KEY_PASSWORD` are not all set. See SECRETS_SETUP.md.'
+            elif [ "$EXISTS" = "true" ]; then
+              echo "\`$TAG\` already exists for this version, so nothing new was published."
+            elif [ "$JOB_STATUS" = "success" ]; then
+              echo "Published GitHub Release \`$TAG\` from commit \`$RELEASE_SHA\`."
+              echo
+              echo '```json'
+              cat dist/build-info.json
+              echo '```'
+            else
+              echo "The release of \`$TAG\` failed. Check the log above; nothing was published if the build failed."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"

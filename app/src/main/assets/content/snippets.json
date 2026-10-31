@@ -1,0 +1,948 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": 1,
+  "generatedAt": "2026-10-30",
+  "snippets": [
+    {
+      "id": "class-skeleton",
+      "title": "Minimal class with default constructor",
+      "description": "The smallest useful class: header directives plus the implicit no-argument constructor that calls Object's constructor.",
+      "collection": "Classes",
+      "code": ".class public Lcom/acme/demo/Greeter;\n.super Ljava/lang/Object;\n.source \"Greeter.java\"\n\n\n# direct methods\n.method public constructor <init>()V\n    .locals 0\n\n    invoke-direct {p0}, Ljava/lang/Object;-><init>()V\n\n    return-void\n.end method\n",
+      "tags": [
+        "class",
+        "constructor",
+        "skeleton"
+      ]
+    },
+    {
+      "id": "class-with-fields",
+      "title": "Class with instance and static fields",
+      "description": "Declares a private instance field, a public static final constant and a mutable static counter.",
+      "collection": "Classes",
+      "code": ".class public Lcom/acme/demo/Settings;\n.super Ljava/lang/Object;\n\n# static fields\n.field public static final MAX_ITEMS:I = 0x64\n\n.field private static created:I\n\n# instance fields\n.field private name:Ljava/lang/String;\n\n\n# direct methods\n.method public constructor <init>()V\n    .locals 1\n\n    invoke-direct {p0}, Ljava/lang/Object;-><init>()V\n\n    const-string v0, \"default\"\n\n    iput-object v0, p0, Lcom/acme/demo/Settings;->name:Ljava/lang/String;\n\n    return-void\n.end method\n",
+      "tags": [
+        "class",
+        "field",
+        "static"
+      ]
+    },
+    {
+      "id": "static-initializer",
+      "title": "Static initializer (<clinit>)",
+      "description": "Runs once when the class is first used; here it fills a static field with a new object.",
+      "collection": "Classes",
+      "code": ".class public Lcom/acme/demo/Registry;\n.super Ljava/lang/Object;\n\n.field private static final ITEMS:Ljava/util/ArrayList;\n\n\n.method static constructor <clinit>()V\n    .locals 1\n\n    new-instance v0, Ljava/util/ArrayList;\n\n    invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V\n\n    sput-object v0, Lcom/acme/demo/Registry;->ITEMS:Ljava/util/ArrayList;\n\n    return-void\n.end method\n",
+      "tags": [
+        "clinit",
+        "static",
+        "initializer"
+      ]
+    },
+    {
+      "id": "interface-declaration",
+      "title": "Interface with abstract methods",
+      "description": "Interfaces are abstract classes with the interface flag; every method is public abstract and has no body.",
+      "collection": "Classes",
+      "code": ".class public interface abstract Lcom/acme/demo/Shape;\n.super Ljava/lang/Object;\n\n\n# virtual methods\n.method public abstract area()D\n.end method\n\n.method public abstract name()Ljava/lang/String;\n.end method\n",
+      "tags": [
+        "interface",
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract-class",
+      "title": "Abstract class with protected constructor",
+      "description": "An abstract base class: abstract method without body, plus a concrete method that calls it.",
+      "collection": "Classes",
+      "code": ".class public abstract Lcom/acme/demo/Animal;\n.super Ljava/lang/Object;\n\n\n# direct methods\n.method protected constructor <init>()V\n    .locals 0\n\n    invoke-direct {p0}, Ljava/lang/Object;-><init>()V\n\n    return-void\n.end method\n\n\n# virtual methods\n.method public abstract sound()Ljava/lang/String;\n.end method\n\n.method public describe()Ljava/lang/String;\n    .locals 1\n\n    invoke-virtual {p0}, Lcom/acme/demo/Animal;->sound()Ljava/lang/String;\n\n    move-result-object v0\n\n    return-object v0\n.end method\n",
+      "tags": [
+        "abstract",
+        "class",
+        "inheritance"
+      ]
+    },
+    {
+      "id": "implements-interface",
+      "title": "Class implementing Runnable",
+      "description": "A class that declares an interface with .implements and provides its method.",
+      "collection": "Classes",
+      "code": ".class public Lcom/acme/demo/Task;\n.super Ljava/lang/Object;\n.implements Ljava/lang/Runnable;\n\n\n# direct methods\n.method public constructor <init>()V\n    .locals 0\n\n    invoke-direct {p0}, Ljava/lang/Object;-><init>()V\n\n    return-void\n.end method\n\n\n# virtual methods\n.method public run()V\n    .locals 2\n\n    sget-object v0, Ljava/lang/System;->out:Ljava/io/PrintStream;\n\n    const-string v1, \"running\"\n\n    invoke-virtual {v0, v1}, Ljava/io/PrintStream;->println(Ljava/lang/String;)V\n\n    return-void\n.end method\n",
+      "tags": [
+        "interface",
+        "implements",
+        "runnable"
+      ]
+    },
+    {
+      "id": "inner-class",
+      "title": "Inner class with outer reference",
+      "description": "How a non-static inner class looks after compilation: the synthetic this$0 field is passed to the constructor.",
+      "collection": "Classes",
+      "code": ".class Lcom/acme/demo/Outer$Inner;\n.super Ljava/lang/Object;\n\n.annotation system Ldalvik/annotation/EnclosingClass;\n    value = Lcom/acme/demo/Outer;\n.end annotation\n\n.annotation system Ldalvik/annotation/InnerClass;\n    accessFlags = 0x0\n    name = \"Inner\"\n.end annotation\n\n\n# instance fields\n.field final synthetic this$0:Lcom/acme/demo/Outer;\n\n\n# direct methods\n.method constructor <init>(Lcom/acme/demo/Outer;)V\n    .locals 0\n\n    iput-object p1, p0, Lcom/acme/demo/Outer$Inner;->this$0:Lcom/acme/demo/Outer;\n\n    invoke-direct {p0}, Ljava/lang/Object;-><init>()V\n\n    return-void\n.end method\n",
+      "tags": [
+        "inner",
+        "nested",
+        "this$0"
+      ]
+    },
+    {
+      "id": "singleton",
+      "title": "Singleton with lazy getInstance",
+      "description": "Static instance field, private constructor and a null check before creating the object.",
+      "collection": "Classes",
+      "code": ".class public final Lcom/acme/demo/Manager;\n.super Ljava/lang/Object;\n\n.field private static instance:Lcom/acme/demo/Manager;\n\n\n# direct methods\n.method private constructor <init>()V\n    .locals 0\n\n    invoke-direct {p0}, Ljava/lang/Object;-><init>()V\n\n    return-void\n.end method\n\n.method public static getInstance()Lcom/acme/demo/Manager;\n    .locals 1\n\n    sget-object v0, Lcom/acme/demo/Manager;->instance:Lcom/acme/demo/Manager;\n\n    if-nez v0, :cond_0\n\n    new-instance v0, Lcom/acme/demo/Manager;\n\n    invoke-direct {v0}, Lcom/acme/demo/Manager;-><init>()V\n\n    sput-object v0, Lcom/acme/demo/Manager;->instance:Lcom/acme/demo/Manager;\n\n    :cond_0\n    return-object v0\n.end method\n",
+      "tags": [
+        "singleton",
+        "static",
+        "null-check"
+      ]
+    },
+    {
+      "id": "enum-like",
+      "title": "Enum with two constants",
+      "description": "The structure compilers generate for an enum: constant fields, a $VALUES array, values() and valueOf().",
+      "collection": "Classes",
+      "code": ".class public final enum Lcom/acme/demo/Color;\n.super Ljava/lang/Enum;\n\n.annotation system Ldalvik/annotation/Signature;\n    value = {\n        \"Ljava/lang/Enum<\",\n        \"Lcom/acme/demo/Color;\",\n        \">;\"\n    }\n.end annotation\n\n\n# static fields\n.field private static final synthetic $VALUES:[Lcom/acme/demo/Color;\n\n.field public static final enum GREEN:Lcom/acme/demo/Color;\n\n.field public static final enum RED:Lcom/acme/demo/Color;\n\n\n# direct methods\n.method static constructor <clinit>()V\n    .locals 4\n\n    new-instance v0, Lcom/acme/demo/Color;\n\n    const-string v1, \"RED\"\n\n    const/4 v2, 0x0\n\n    invoke-direct {v0, v1, v2}, Lcom/acme/demo/Color;-><init>(Ljava/lang/String;I)V\n\n    sput-object v0, Lcom/acme/demo/Color;->RED:Lcom/acme/demo/Color;\n\n    new-instance v0, Lcom/acme/demo/Color;\n\n    const-string v1, \"GREEN\"\n\n    const/4 v3, 0x1\n\n    invoke-direct {v0, v1, v3}, Lcom/acme/demo/Color;-><init>(Ljava/lang/String;I)V\n\n    sput-object v0, Lcom/acme/demo/Color;->GREEN:Lcom/acme/demo/Color;\n\n    const/4 v0, 0x2\n\n    new-array v0, v0, [Lcom/acme/demo/Color;\n\n    sget-object v1, Lcom/acme/demo/Color;->RED:Lcom/acme/demo/Color;\n\n    aput-object v1, v0, v2\n\n    sget-object v1, Lcom/acme/demo/Color;->GREEN:Lcom/acme/demo/Color;\n\n    aput-object v1, v0, v3\n\n    sput-object v0, Lcom/acme/demo/Color;->$VALUES:[Lcom/acme/demo/Color;\n\n    return-void\n.end method\n\n.method private constructor <init>(Ljava/lang/String;I)V\n    .locals 0\n\n    invoke-direct {p0, p1, p2}, Ljava/lang/Enum;-><init>(Ljava/lang/String;I)V\n\n    return-void\n.end method\n\n.method public static valueOf(Ljava/lang/String;)Lcom/acme/demo/Color;\n    .locals 1\n\n    const-class v0, Lcom/acme/demo/Color;\n\n    invoke-static {v0, p0}, Ljava/lang/Enum;->valueOf(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;\n\n    move-result-object p0\n\n    check-cast p0, Lcom/acme/demo/Color;\n\n    return-object p0\n.end method\n\n.method public static values()[Lcom/acme/demo/Color;\n    .locals 1\n\n    sget-object v0, Lcom/acme/demo/Color;->$VALUES:[Lcom/acme/demo/Color;\n\n    invoke-virtual {v0}, [Lcom/acme/demo/Color;->clone()Ljava/lang/Object;\n\n    move-result-object v0\n\n    check-cast v0, [Lcom/acme/demo/Color;\n\n    return-object v0\n.end method\n",
+      "tags": [
+        "enum",
+        "clinit",
+        "values"
+      ]
+    },
+    {
+      "id": "field-access-kinds",
+      "title": "Reading and writing fields",
+      "description": "Static fields use sget/sput, instance fields use iget/iput; the suffix selects the type (-object, -wide, -boolean ...).",
+      "collection": "Classes",
+      "code": ".class public Lcom/acme/demo/Counter;\n.super Ljava/lang/Object;\n\n.field private static total:J\n\n.field private count:I\n\n.field private label:Ljava/lang/String;\n\n\n.method public bump()V\n    .locals 5\n\n    # instance int field: read, add 1, write back\n    iget v0, p0, Lcom/acme/demo/Counter;->count:I\n\n    add-int/lit8 v0, v0, 0x1\n\n    iput v0, p0, Lcom/acme/demo/Counter;->count:I\n\n    # static long field uses a register pair (v1, v2); the constant uses (v3, v4)\n    sget-wide v1, Lcom/acme/demo/Counter;->total:J\n\n    const-wide/16 v3, 0x1\n\n    add-long/2addr v1, v3\n\n    sput-wide v1, Lcom/acme/demo/Counter;->total:J\n\n    return-void\n.end method\n",
+      "tags": [
+        "field",
+        "iget",
+        "iput",
+        "sget",
+        "sput"
+      ]
+    },
+    {
+      "id": "constructor-with-args",
+      "title": "Constructor storing its arguments",
+      "description": "Calls the superclass constructor first, then copies the parameters into fields.",
+      "collection": "Methods",
+      "code": ".class public Lcom/acme/demo/Person;\n.super Ljava/lang/Object;\n\n.field private final age:I\n\n.field private final name:Ljava/lang/String;\n\n\n.method public constructor <init>(Ljava/lang/String;I)V\n    .locals 0\n\n    invoke-direct {p0}, Ljava/lang/Object;-><init>()V\n\n    iput-object p1, p0, Lcom/acme/demo/Person;->name:Ljava/lang/String;\n\n    iput p2, p0, Lcom/acme/demo/Person;->age:I\n\n    return-void\n.end method\n",
+      "tags": [
+        "constructor",
+        "fields",
+        "parameters"
+      ]
+    },
+    {
+      "id": "getter-setter",
+      "title": "Getter and setter pair",
+      "description": "iget-object / iput-object on an instance field; p0 is this and p1 the new value.",
+      "collection": "Methods",
+      "code": ".class public Lcom/acme/demo/Person;\n.super Ljava/lang/Object;\n\n.field private name:Ljava/lang/String;\n\n\n.method public getName()Ljava/lang/String;\n    .locals 1\n\n    iget-object v0, p0, Lcom/acme/demo/Person;->name:Ljava/lang/String;\n\n    return-object v0\n.end method\n\n.method public setName(Ljava/lang/String;)V\n    .locals 0\n\n    iput-object p1, p0, Lcom/acme/demo/Person;->name:Ljava/lang/String;\n\n    return-void\n.end method\n",
+      "tags": [
+        "getter",
+        "setter",
+        "iget",
+        "iput"
+      ]
+    },
+    {
+      "id": "static-add",
+      "title": "Static method returning an int",
+      "description": "A static method has no this register: the first parameter is p0 (the same register as v(locals)).",
+      "collection": "Methods",
+      "code": ".method public static add(II)I\n    .locals 1\n\n    add-int v0, p0, p1\n\n    return v0\n.end method\n",
+      "tags": [
+        "static",
+        "arithmetic",
+        "return"
+      ]
+    },
+    {
+      "id": "wide-parameters",
+      "title": "Long parameters take two registers",
+      "description": "sum(JJ)J has four parameter words: the first long is p0/p1, the second p2/p3. The result pair is v0/v1.",
+      "collection": "Methods",
+      "code": ".method public static sum(JJ)J\n    .locals 2\n\n    add-long v0, p0, p2\n\n    return-wide v0\n.end method\n",
+      "tags": [
+        "wide",
+        "long",
+        "register-pair",
+        "parameters"
+      ]
+    },
+    {
+      "id": "instance-method-this",
+      "title": "Instance method reading a field",
+      "description": "In an instance method p0 is this, so a field read starts with iget v0, p0, Class;->field:Type.",
+      "collection": "Methods",
+      "code": ".class public Lcom/acme/demo/Box;\n.super Ljava/lang/Object;\n\n.field private width:I\n\n.field private height:I\n\n\n.method public area()I\n    .locals 2\n\n    iget v0, p0, Lcom/acme/demo/Box;->width:I\n\n    iget v1, p0, Lcom/acme/demo/Box;->height:I\n\n    mul-int/2addr v0, v1\n\n    return v0\n.end method\n",
+      "tags": [
+        "instance",
+        "this",
+        "iget"
+      ]
+    },
+    {
+      "id": "increment-field",
+      "title": "Increment an instance field",
+      "description": "Read the field, add a literal with add-int/lit8, store it back.",
+      "collection": "Methods",
+      "code": ".method public increment()V\n    .locals 2\n\n    iget v0, p0, Lcom/acme/demo/Counter;->count:I\n\n    add-int/lit8 v0, v0, 0x1\n\n    iput v0, p0, Lcom/acme/demo/Counter;->count:I\n\n    return-void\n.end method\n",
+      "tags": [
+        "increment",
+        "field",
+        "lit8"
+      ]
+    },
+    {
+      "id": "abstract-and-native",
+      "title": "Abstract and native method declarations",
+      "description": "Abstract and native methods have no code, so they need no .locals and end immediately.",
+      "collection": "Methods",
+      "code": ".class public abstract Lcom/acme/demo/Engine;\n.super Ljava/lang/Object;\n\n\n.method public abstract start()V\n.end method\n\n.method public native checksum([B)I\n.end method\n",
+      "tags": [
+        "abstract",
+        "native",
+        "declaration"
+      ]
+    },
+    {
+      "id": "tostring-override",
+      "title": "Overriding toString()",
+      "description": "Returns a constant string; the method signature must match Object.toString exactly.",
+      "collection": "Methods",
+      "code": ".method public toString()Ljava/lang/String;\n    .locals 1\n\n    const-string v0, \"Example{}\"\n\n    return-object v0\n.end method\n",
+      "tags": [
+        "override",
+        "toString",
+        "string"
+      ]
+    },
+    {
+      "id": "main-method",
+      "title": "static main(String[]) printing a line",
+      "description": "The classic entry point. The args array arrives in p0.",
+      "collection": "Methods",
+      "code": ".method public static main([Ljava/lang/String;)V\n    .locals 2\n\n    sget-object v0, Ljava/lang/System;->out:Ljava/io/PrintStream;\n\n    const-string v1, \"Hello, smali!\"\n\n    invoke-virtual {v0, v1}, Ljava/io/PrintStream;->println(Ljava/lang/String;)V\n\n    return-void\n.end method\n",
+      "tags": [
+        "main",
+        "println",
+        "static"
+      ]
+    },
+    {
+      "id": "synthetic-bridge-accessor",
+      "title": "Static accessor for a private field",
+      "description": "Pattern used by older compilers: a synthetic static method lets another class read a private field.",
+      "collection": "Methods",
+      "code": ".method static synthetic access$000(Lcom/acme/demo/Box;)I\n    .locals 1\n\n    iget v0, p0, Lcom/acme/demo/Box;->width:I\n\n    return v0\n.end method\n",
+      "tags": [
+        "synthetic",
+        "accessor",
+        "static"
+      ]
+    },
+    {
+      "id": "method-with-annotation",
+      "title": "Method with a parameter annotation",
+      "description": "Annotations are written inside the method; here a runtime annotation without elements.",
+      "collection": "Methods",
+      "code": ".method public run()V\n    .locals 0\n    .annotation runtime Ljava/lang/Deprecated;\n    .end annotation\n\n    return-void\n.end method\n",
+      "tags": [
+        "annotation",
+        "override",
+        "method"
+      ]
+    },
+    {
+      "id": "string-constant-print",
+      "title": "Load and print a string constant",
+      "description": "const-string loads a string from the pool; System.out is a static field of type PrintStream.",
+      "collection": "Strings",
+      "code": ".method public static hello()V\n    .locals 2\n\n    sget-object v0, Ljava/lang/System;->out:Ljava/io/PrintStream;\n\n    const-string v1, \"Hello, world!\"\n\n    invoke-virtual {v0, v1}, Ljava/io/PrintStream;->println(Ljava/lang/String;)V\n\n    return-void\n.end method\n",
+      "tags": [
+        "const-string",
+        "println",
+        "sget-object"
+      ]
+    },
+    {
+      "id": "string-concat-builder",
+      "title": "Concatenate with StringBuilder",
+      "description": "What \"Hi \" + name + \"!\" compiles to without invokedynamic: new StringBuilder, three appends, toString.",
+      "collection": "Strings",
+      "code": ".method public static greet(Ljava/lang/String;)Ljava/lang/String;\n    .locals 2\n\n    new-instance v0, Ljava/lang/StringBuilder;\n\n    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V\n\n    const-string v1, \"Hi \"\n\n    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;\n\n    invoke-virtual {v0, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;\n\n    const-string v1, \"!\"\n\n    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;\n\n    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;\n\n    move-result-object v0\n\n    return-object v0\n.end method\n",
+      "tags": [
+        "StringBuilder",
+        "append",
+        "concat"
+      ]
+    },
+    {
+      "id": "string-builder-int",
+      "title": "Append an int to a StringBuilder",
+      "description": "append has one overload per primitive type; the descriptor in the call selects it.",
+      "collection": "Strings",
+      "code": ".method public static label(I)Ljava/lang/String;\n    .locals 2\n\n    new-instance v0, Ljava/lang/StringBuilder;\n\n    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V\n\n    const-string v1, \"count=\"\n\n    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;\n\n    invoke-virtual {v0, p0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;\n\n    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;\n\n    move-result-object v0\n\n    return-object v0\n.end method\n",
+      "tags": [
+        "StringBuilder",
+        "append",
+        "int"
+      ]
+    },
+    {
+      "id": "string-equals",
+      "title": "Compare strings with equals()",
+      "description": "Never compare strings with if-eq (that compares references). Call equals and test the boolean result.",
+      "collection": "Strings",
+      "code": ".method public static isYes(Ljava/lang/String;)Z\n    .locals 1\n\n    const-string v0, \"yes\"\n\n    invoke-virtual {v0, p0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z\n\n    move-result v0\n\n    return v0\n.end method\n",
+      "tags": [
+        "equals",
+        "compare",
+        "if-eqz"
+      ]
+    },
+    {
+      "id": "string-null-or-empty",
+      "title": "Null or empty string check",
+      "description": "Short-circuit test: null first, then length() == 0.",
+      "collection": "Strings",
+      "code": ".method public static isEmpty(Ljava/lang/String;)Z\n    .locals 1\n\n    if-eqz p0, :cond_empty\n\n    invoke-virtual {p0}, Ljava/lang/String;->length()I\n\n    move-result v0\n\n    if-nez v0, :cond_not_empty\n\n    :cond_empty\n    const/4 v0, 0x1\n\n    return v0\n\n    :cond_not_empty\n    const/4 v0, 0x0\n\n    return v0\n.end method\n",
+      "tags": [
+        "null-check",
+        "length",
+        "empty"
+      ]
+    },
+    {
+      "id": "string-length-charat",
+      "title": "length() and charAt()",
+      "description": "Reads the first character of a non-empty string; char values are ordinary 16-bit ints.",
+      "collection": "Strings",
+      "code": ".method public static firstChar(Ljava/lang/String;)C\n    .locals 2\n\n    invoke-virtual {p0}, Ljava/lang/String;->length()I\n\n    move-result v0\n\n    if-nez v0, :cond_0\n\n    const/4 v0, 0x0\n\n    return v0\n\n    :cond_0\n    const/4 v1, 0x0\n\n    invoke-virtual {p0, v1}, Ljava/lang/String;->charAt(I)C\n\n    move-result v0\n\n    return v0\n.end method\n",
+      "tags": [
+        "length",
+        "charAt",
+        "char"
+      ]
+    },
+    {
+      "id": "string-switch",
+      "title": "switch on a string (hashCode + equals)",
+      "description": "Compilers switch on hashCode() with a sparse-switch and confirm with equals(). Keys must be sorted ascending.",
+      "collection": "Strings",
+      "code": ".method public static code(Ljava/lang/String;)I\n    .locals 2\n\n    invoke-virtual {p0}, Ljava/lang/String;->hashCode()I\n\n    move-result v0\n\n    sparse-switch v0, :sswitch_data_0\n\n    :goto_default\n    const/4 v0, -0x1\n\n    return v0\n\n    :sswitch_no\n    const-string v1, \"no\"\n\n    invoke-virtual {p0, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z\n\n    move-result v1\n\n    if-eqz v1, :goto_default\n\n    const/4 v0, 0x0\n\n    return v0\n\n    :sswitch_yes\n    const-string v1, \"yes\"\n\n    invoke-virtual {p0, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z\n\n    move-result v1\n\n    if-eqz v1, :goto_default\n\n    const/4 v0, 0x1\n\n    return v0\n\n    :sswitch_data_0\n    .sparse-switch\n        0xdc1 -> :sswitch_no\n        0x1d2e7 -> :sswitch_yes\n    .end sparse-switch\n.end method\n",
+      "tags": [
+        "switch",
+        "sparse-switch",
+        "hashCode",
+        "equals"
+      ]
+    },
+    {
+      "id": "string-valueof-compare",
+      "title": "String.valueOf and compareTo",
+      "description": "Converting an int with String.valueOf and ordering two strings with compareTo.",
+      "collection": "Strings",
+      "code": ".method public static order(Ljava/lang/String;I)I\n    .locals 1\n\n    invoke-static {p1}, Ljava/lang/String;->valueOf(I)Ljava/lang/String;\n\n    move-result-object v0\n\n    invoke-virtual {p0, v0}, Ljava/lang/String;->compareTo(Ljava/lang/String;)I\n\n    move-result v0\n\n    return v0\n.end method\n",
+      "tags": [
+        "valueOf",
+        "compareTo",
+        "static"
+      ]
+    },
+    {
+      "id": "array-new-fill",
+      "title": "Create an int array and fill it",
+      "description": "new-array takes the length in a register; aput stores one element by index.",
+      "collection": "Arrays",
+      "code": ".method public static create()[I\n    .locals 3\n\n    const/4 v0, 0x3\n\n    new-array v0, v0, [I\n\n    const/4 v1, 0x0\n\n    const/16 v2, 0xa\n\n    aput v2, v0, v1\n\n    const/4 v1, 0x1\n\n    const/16 v2, 0x14\n\n    aput v2, v0, v1\n\n    const/4 v1, 0x2\n\n    const/16 v2, 0x1e\n\n    aput v2, v0, v1\n\n    return-object v0\n.end method\n",
+      "tags": [
+        "new-array",
+        "aput",
+        "int-array"
+      ]
+    },
+    {
+      "id": "array-fill-array-data",
+      "title": "Initialise an array with fill-array-data",
+      "description": "For constant contents compilers emit fill-array-data; the payload sits after the code and is word aligned.",
+      "collection": "Arrays",
+      "code": ".method public static primes()[I\n    .locals 1\n\n    const/4 v0, 0x5\n\n    new-array v0, v0, [I\n\n    fill-array-data v0, :array_0\n\n    return-object v0\n\n    :array_0\n    .array-data 4\n        0x2\n        0x3\n        0x5\n        0x7\n        0xb\n    .end array-data\n.end method\n",
+      "tags": [
+        "fill-array-data",
+        "array-data",
+        "primes"
+      ]
+    },
+    {
+      "id": "array-filled-new-array",
+      "title": "filled-new-array with register values",
+      "description": "Builds a small array straight from registers; the array arrives through move-result-object.",
+      "collection": "Arrays",
+      "code": ".method public static triple(III)[I\n    .locals 1\n\n    filled-new-array {p0, p1, p2}, [I\n\n    move-result-object v0\n\n    return-object v0\n.end method\n",
+      "tags": [
+        "filled-new-array",
+        "move-result-object"
+      ]
+    },
+    {
+      "id": "array-sum-loop",
+      "title": "Sum all elements of an int array",
+      "description": "Index loop: array-length once, then aget inside the loop until the index reaches the length.",
+      "collection": "Arrays",
+      "code": ".method public static sum([I)I\n    .locals 4\n\n    const/4 v0, 0x0\n\n    array-length v1, p0\n\n    const/4 v2, 0x0\n\n    :goto_0\n    if-ge v2, v1, :cond_0\n\n    aget v3, p0, v2\n\n    add-int/2addr v0, v3\n\n    add-int/lit8 v2, v2, 0x1\n\n    goto :goto_0\n\n    :cond_0\n    return v0\n.end method\n",
+      "tags": [
+        "array-length",
+        "aget",
+        "loop",
+        "sum"
+      ]
+    },
+    {
+      "id": "array-of-strings",
+      "title": "Array of strings",
+      "description": "Object arrays use aput-object / aget-object and a class descriptor array type.",
+      "collection": "Arrays",
+      "code": ".method public static names()[Ljava/lang/String;\n    .locals 3\n\n    const/4 v0, 0x2\n\n    new-array v0, v0, [Ljava/lang/String;\n\n    const/4 v1, 0x0\n\n    const-string v2, \"alpha\"\n\n    aput-object v2, v0, v1\n\n    const/4 v1, 0x1\n\n    const-string v2, \"beta\"\n\n    aput-object v2, v0, v1\n\n    return-object v0\n.end method\n",
+      "tags": [
+        "string-array",
+        "aput-object",
+        "aget-object"
+      ]
+    },
+    {
+      "id": "array-for-each-objects",
+      "title": "Enhanced for over an object array",
+      "description": "Same shape as the index loop, but elements are read with aget-object and passed to a method.",
+      "collection": "Arrays",
+      "code": ".method public static printAll([Ljava/lang/String;)V\n    .locals 4\n\n    sget-object v0, Ljava/lang/System;->out:Ljava/io/PrintStream;\n\n    array-length v1, p0\n\n    const/4 v2, 0x0\n\n    :goto_0\n    if-ge v2, v1, :cond_0\n\n    aget-object v3, p0, v2\n\n    invoke-virtual {v0, v3}, Ljava/io/PrintStream;->println(Ljava/lang/String;)V\n\n    add-int/lit8 v2, v2, 0x1\n\n    goto :goto_0\n\n    :cond_0\n    return-void\n.end method\n",
+      "tags": [
+        "for-each",
+        "aget-object",
+        "loop",
+        "println"
+      ]
+    },
+    {
+      "id": "array-of-arrays",
+      "title": "Array of arrays (int[2][])",
+      "description": "A two-dimensional array is an array whose elements are arrays; here only the first row is allocated.",
+      "collection": "Arrays",
+      "code": ".method public static grid()[[I\n    .locals 3\n\n    const/4 v0, 0x2\n\n    new-array v0, v0, [[I\n\n    const/4 v1, 0x0\n\n    const/4 v2, 0x3\n\n    new-array v2, v2, [I\n\n    aput-object v2, v0, v1\n\n    return-object v0\n.end method\n",
+      "tags": [
+        "multi-dimensional",
+        "new-array",
+        "aput-object"
+      ]
+    },
+    {
+      "id": "array-byte-and-copy",
+      "title": "Copy a byte[] with System.arraycopy",
+      "description": "Allocates a same-sized byte array, then copies with arraycopy: five argument registers, the most a plain invoke can take.",
+      "collection": "Arrays",
+      "code": ".method public static copy([B)[B\n    .locals 3\n\n    array-length v0, p0\n\n    new-array v1, v0, [B\n\n    const/4 v2, 0x0\n\n    invoke-static {p0, v2, v1, v2, v0}, Ljava/lang/System;->arraycopy(Ljava/lang/Object;ILjava/lang/Object;II)V\n\n    return-object v1\n.end method\n",
+      "tags": [
+        "byte-array",
+        "arraycopy",
+        "new-array"
+      ]
+    },
+    {
+      "id": "array-length-check",
+      "title": "Bounds check before aget",
+      "description": "Dalvik throws ArrayIndexOutOfBoundsException by itself, but an explicit length comparison avoids it.",
+      "collection": "Arrays",
+      "code": ".method public static safeGet([II)I\n    .locals 2\n\n    array-length v0, p0\n\n    if-ge p1, v0, :cond_missing\n\n    if-ltz p1, :cond_missing\n\n    aget v1, p0, p1\n\n    return v1\n\n    :cond_missing\n    const/4 v1, -0x1\n\n    return v1\n.end method\n",
+      "tags": [
+        "bounds",
+        "array-length",
+        "if-ge"
+      ]
+    },
+    {
+      "id": "if-else-int",
+      "title": "if / else on two ints",
+      "description": "if-ge jumps when the condition is FALSE for the source `if (a < b)`: compilers invert the test to skip the body.",
+      "collection": "Conditions",
+      "code": ".method public static smaller(II)I\n    .locals 1\n\n    if-ge p0, p1, :cond_0\n\n    move v0, p0\n\n    :goto_0\n    return v0\n\n    :cond_0\n    move v0, p1\n\n    goto :goto_0\n.end method\n",
+      "tags": [
+        "if-else",
+        "if-ge",
+        "compare"
+      ]
+    },
+    {
+      "id": "max-of-two",
+      "title": "max(a, b) with early return",
+      "description": "Two returns instead of a join label: p0 and p1 are returned directly.",
+      "collection": "Conditions",
+      "code": ".method public static max(II)I\n    .locals 0\n\n    if-le p0, p1, :cond_0\n\n    return p0\n\n    :cond_0\n    return p1\n.end method\n",
+      "tags": [
+        "max",
+        "ternary",
+        "return"
+      ]
+    },
+    {
+      "id": "null-check-branch",
+      "title": "Branch on null",
+      "description": "if-eqz tests an object reference against null just like an int against zero.",
+      "collection": "Conditions",
+      "code": ".method public static lengthOrZero(Ljava/lang/String;)I\n    .locals 1\n\n    if-nez p0, :cond_0\n\n    const/4 v0, 0x0\n\n    return v0\n\n    :cond_0\n    invoke-virtual {p0}, Ljava/lang/String;->length()I\n\n    move-result v0\n\n    return v0\n.end method\n",
+      "tags": [
+        "null-check",
+        "if-eqz",
+        "if-nez"
+      ]
+    },
+    {
+      "id": "null-check-throw",
+      "title": "Reject null with an exception",
+      "description": "Create the exception, call its constructor with a message, and throw it.",
+      "collection": "Conditions",
+      "code": ".method public static requireName(Ljava/lang/String;)Ljava/lang/String;\n    .locals 2\n\n    if-nez p0, :cond_0\n\n    new-instance v0, Ljava/lang/NullPointerException;\n\n    const-string v1, \"name == null\"\n\n    invoke-direct {v0, v1}, Ljava/lang/NullPointerException;-><init>(Ljava/lang/String;)V\n\n    throw v0\n\n    :cond_0\n    return-object p0\n.end method\n",
+      "tags": [
+        "null-check",
+        "throw",
+        "NullPointerException"
+      ]
+    },
+    {
+      "id": "range-check-and",
+      "title": "Range check with &&",
+      "description": "lo <= x && x <= hi: each failed test jumps to the shared false exit.",
+      "collection": "Conditions",
+      "code": ".method public static inRange(III)Z\n    .locals 1\n\n    if-gt p0, p1, :cond_false\n\n    if-gt p1, p2, :cond_false\n\n    const/4 v0, 0x1\n\n    return v0\n\n    :cond_false\n    const/4 v0, 0x0\n\n    return v0\n.end method\n",
+      "tags": [
+        "and",
+        "range",
+        "short-circuit",
+        "boolean"
+      ]
+    },
+    {
+      "id": "or-condition",
+      "title": "Combine tests with ||",
+      "description": "x == 0 || x == 1: the first success jumps straight to the true exit.",
+      "collection": "Conditions",
+      "code": ".method public static isBit(I)Z\n    .locals 1\n\n    if-eqz p0, :cond_true\n\n    const/4 v0, 0x1\n\n    if-ne p0, v0, :cond_false\n\n    :cond_true\n    const/4 v0, 0x1\n\n    return v0\n\n    :cond_false\n    const/4 v0, 0x0\n\n    return v0\n.end method\n",
+      "tags": [
+        "or",
+        "short-circuit",
+        "boolean"
+      ]
+    },
+    {
+      "id": "compare-long",
+      "title": "Compare two longs",
+      "description": "There is no if-lt for longs: cmp-long produces -1, 0 or 1 which you then test against zero.",
+      "collection": "Conditions",
+      "code": ".method public static isBigger(JJ)Z\n    .locals 1\n\n    cmp-long v0, p0, p2\n\n    if-lez v0, :cond_0\n\n    const/4 v0, 0x1\n\n    return v0\n\n    :cond_0\n    const/4 v0, 0x0\n\n    return v0\n.end method\n",
+      "tags": [
+        "cmp-long",
+        "long",
+        "if-lez"
+      ]
+    },
+    {
+      "id": "compare-float",
+      "title": "Compare two floats",
+      "description": "cmpg-float / cmpl-float differ only in how NaN is ordered (+1 vs -1).",
+      "collection": "Conditions",
+      "code": ".method public static greater(FF)Z\n    .locals 1\n\n    cmpl-float v0, p0, p1\n\n    if-lez v0, :cond_0\n\n    const/4 v0, 0x1\n\n    return v0\n\n    :cond_0\n    const/4 v0, 0x0\n\n    return v0\n.end method\n",
+      "tags": [
+        "cmpg-float",
+        "cmpl-float",
+        "float",
+        "NaN"
+      ]
+    },
+    {
+      "id": "packed-switch",
+      "title": "switch with consecutive cases",
+      "description": "packed-switch stores one target per value starting at the first key; the default falls through the instruction.",
+      "collection": "Conditions",
+      "code": ".method public static name(I)Ljava/lang/String;\n    .locals 1\n\n    packed-switch p0, :pswitch_data_0\n\n    const-string v0, \"other\"\n\n    return-object v0\n\n    :pswitch_0\n    const-string v0, \"zero\"\n\n    return-object v0\n\n    :pswitch_1\n    const-string v0, \"one\"\n\n    return-object v0\n\n    :pswitch_data_0\n    .packed-switch 0x0\n        :pswitch_0\n        :pswitch_1\n    .end packed-switch\n.end method\n",
+      "tags": [
+        "switch",
+        "packed-switch",
+        "case"
+      ]
+    },
+    {
+      "id": "sparse-switch",
+      "title": "switch with scattered cases",
+      "description": "sparse-switch lists key -> label pairs in ascending key order; use it when keys are not consecutive.",
+      "collection": "Conditions",
+      "code": ".method public static kind(I)I\n    .locals 1\n\n    sparse-switch p0, :sswitch_data_0\n\n    const/4 v0, 0x0\n\n    return v0\n\n    :sswitch_10\n    const/4 v0, 0x1\n\n    return v0\n\n    :sswitch_100\n    const/4 v0, 0x2\n\n    return v0\n\n    :sswitch_data_0\n    .sparse-switch\n        0xa -> :sswitch_10\n        0x64 -> :sswitch_100\n    .end sparse-switch\n.end method\n",
+      "tags": [
+        "switch",
+        "sparse-switch",
+        "case"
+      ]
+    },
+    {
+      "id": "instance-of-check",
+      "title": "instanceof and check-cast",
+      "description": "Test the type first, then cast; check-cast throws ClassCastException if the object is the wrong type.",
+      "collection": "Conditions",
+      "code": ".method public static asString(Ljava/lang/Object;)Ljava/lang/String;\n    .locals 1\n\n    instance-of v0, p0, Ljava/lang/String;\n\n    if-nez v0, :cond_0\n\n    const/4 v0, 0x0\n\n    return-object v0\n\n    :cond_0\n    check-cast p0, Ljava/lang/String;\n\n    return-object p0\n.end method\n",
+      "tags": [
+        "instance-of",
+        "check-cast",
+        "type"
+      ]
+    },
+    {
+      "id": "boolean-not",
+      "title": "Negate a boolean",
+      "description": "Booleans are 0 or 1, so !b is an xor with 1.",
+      "collection": "Conditions",
+      "code": ".method public static not(Z)Z\n    .locals 0\n\n    xor-int/lit8 p0, p0, 0x1\n\n    return p0\n.end method\n",
+      "tags": [
+        "boolean",
+        "xor",
+        "not"
+      ]
+    },
+    {
+      "id": "for-loop",
+      "title": "Counting for loop",
+      "description": "for (int i = 0; i < n; i++) sum += i: test at the top, increment at the bottom, jump back.",
+      "collection": "Loops",
+      "code": ".method public static sumTo(I)I\n    .locals 2\n\n    const/4 v0, 0x0\n\n    const/4 v1, 0x0\n\n    :goto_0\n    if-ge v1, p0, :cond_0\n\n    add-int/2addr v0, v1\n\n    add-int/lit8 v1, v1, 0x1\n\n    goto :goto_0\n\n    :cond_0\n    return v0\n.end method\n",
+      "tags": [
+        "for",
+        "loop",
+        "counter"
+      ]
+    },
+    {
+      "id": "while-loop",
+      "title": "while loop",
+      "description": "Halving a number until it reaches zero; the loop condition is checked before each pass.",
+      "collection": "Loops",
+      "code": ".method public static bitLength(I)I\n    .locals 1\n\n    const/4 v0, 0x0\n\n    :goto_0\n    if-eqz p0, :cond_0\n\n    ushr-int/lit8 p0, p0, 0x1\n\n    add-int/lit8 v0, v0, 0x1\n\n    goto :goto_0\n\n    :cond_0\n    return v0\n.end method\n",
+      "tags": [
+        "while",
+        "loop",
+        "shift"
+      ]
+    },
+    {
+      "id": "do-while-loop",
+      "title": "do-while loop",
+      "description": "The body runs once before the first test, so the conditional jump is at the bottom and jumps backwards.",
+      "collection": "Loops",
+      "code": ".method public static digits(I)I\n    .locals 1\n\n    const/4 v0, 0x0\n\n    :goto_0\n    div-int/lit8 p0, p0, 0xa\n\n    add-int/lit8 v0, v0, 0x1\n\n    if-nez p0, :goto_0\n\n    return v0\n.end method\n",
+      "tags": [
+        "do-while",
+        "loop"
+      ]
+    },
+    {
+      "id": "countdown-loop",
+      "title": "Loop counting down",
+      "description": "Counting down to zero lets the loop test use if-gtz against zero with no second register.",
+      "collection": "Loops",
+      "code": ".method public static countdown(I)V\n    .locals 2\n\n    sget-object v0, Ljava/lang/System;->out:Ljava/io/PrintStream;\n\n    :goto_0\n    if-lez p0, :cond_0\n\n    invoke-virtual {v0, p0}, Ljava/io/PrintStream;->println(I)V\n\n    add-int/lit8 p0, p0, -0x1\n\n    goto :goto_0\n\n    :cond_0\n    return-void\n.end method\n",
+      "tags": [
+        "countdown",
+        "if-gtz",
+        "loop"
+      ]
+    },
+    {
+      "id": "iterator-loop",
+      "title": "for-each over a List",
+      "description": "Iterable loops call iterator(), then hasNext() / next() with a check-cast to the element type.",
+      "collection": "Loops",
+      "code": ".method public static printAll(Ljava/util/List;)V\n    .locals 4\n\n    invoke-interface {p0}, Ljava/util/List;->iterator()Ljava/util/Iterator;\n\n    move-result-object v0\n\n    :goto_0\n    invoke-interface {v0}, Ljava/util/Iterator;->hasNext()Z\n\n    move-result v1\n\n    if-eqz v1, :cond_0\n\n    invoke-interface {v0}, Ljava/util/Iterator;->next()Ljava/lang/Object;\n\n    move-result-object v1\n\n    check-cast v1, Ljava/lang/String;\n\n    sget-object v2, Ljava/lang/System;->out:Ljava/io/PrintStream;\n\n    invoke-virtual {v2, v1}, Ljava/io/PrintStream;->println(Ljava/lang/String;)V\n\n    goto :goto_0\n\n    :cond_0\n    return-void\n.end method\n",
+      "tags": [
+        "iterator",
+        "for-each",
+        "invoke-interface",
+        "list"
+      ]
+    },
+    {
+      "id": "loop-break-continue",
+      "title": "break and continue",
+      "description": "continue jumps to the increment, break jumps past the loop: here the first negative number stops the sum.",
+      "collection": "Loops",
+      "code": ".method public static sumPositive([I)I\n    .locals 4\n\n    const/4 v0, 0x0\n\n    const/4 v1, 0x0\n\n    array-length v2, p0\n\n    :goto_0\n    if-ge v1, v2, :cond_end\n\n    aget v3, p0, v1\n\n    if-ltz v3, :cond_end\n\n    if-nez v3, :cond_add\n\n    add-int/lit8 v1, v1, 0x1\n\n    goto :goto_0\n\n    :cond_add\n    add-int/2addr v0, v3\n\n    add-int/lit8 v1, v1, 0x1\n\n    goto :goto_0\n\n    :cond_end\n    return v0\n.end method\n",
+      "tags": [
+        "break",
+        "continue",
+        "loop",
+        "array"
+      ]
+    },
+    {
+      "id": "nested-loops",
+      "title": "Nested loops (multiplication table sum)",
+      "description": "Two counters and two labels; the inner loop restarts from zero for each outer pass.",
+      "collection": "Loops",
+      "code": ".method public static tableSum(I)I\n    .locals 4\n\n    const/4 v0, 0x0\n\n    const/4 v1, 0x0\n\n    :outer\n    if-ge v1, p0, :done\n\n    const/4 v2, 0x0\n\n    :inner\n    if-ge v2, p0, :next_row\n\n    mul-int v3, v1, v2\n\n    add-int/2addr v0, v3\n\n    add-int/lit8 v2, v2, 0x1\n\n    goto :inner\n\n    :next_row\n    add-int/lit8 v1, v1, 0x1\n\n    goto :outer\n\n    :done\n    return v0\n.end method\n",
+      "tags": [
+        "nested",
+        "loop",
+        "multiply"
+      ]
+    },
+    {
+      "id": "invoke-static-call",
+      "title": "invoke-static",
+      "description": "Static calls have no receiver; arguments come straight from registers and the result needs move-result.",
+      "collection": "Method calls",
+      "code": ".method public static toText(I)Ljava/lang/String;\n    .locals 1\n\n    invoke-static {p0}, Ljava/lang/Integer;->toString(I)Ljava/lang/String;\n\n    move-result-object v0\n\n    return-object v0\n.end method\n",
+      "tags": [
+        "invoke-static",
+        "move-result",
+        "Integer"
+      ]
+    },
+    {
+      "id": "invoke-virtual-call",
+      "title": "invoke-virtual",
+      "description": "Virtual calls list the receiver first. The receiver and arguments must all be in registers v0..v15.",
+      "collection": "Method calls",
+      "code": ".method public static shout(Ljava/lang/String;)Ljava/lang/String;\n    .locals 1\n\n    invoke-virtual {p0}, Ljava/lang/String;->toUpperCase()Ljava/lang/String;\n\n    move-result-object v0\n\n    return-object v0\n.end method\n",
+      "tags": [
+        "invoke-virtual",
+        "receiver",
+        "String"
+      ]
+    },
+    {
+      "id": "invoke-direct-call",
+      "title": "invoke-direct (constructor and private method)",
+      "description": "invoke-direct is used for constructors and private methods; after new-instance the object is not usable until <init> runs.",
+      "collection": "Method calls",
+      "code": ".method public static make()Ljava/util/ArrayList;\n    .locals 2\n\n    new-instance v0, Ljava/util/ArrayList;\n\n    const/16 v1, 0xa\n\n    invoke-direct {v0, v1}, Ljava/util/ArrayList;-><init>(I)V\n\n    return-object v0\n.end method\n",
+      "tags": [
+        "invoke-direct",
+        "constructor",
+        "new-instance"
+      ]
+    },
+    {
+      "id": "invoke-super-call",
+      "title": "invoke-super",
+      "description": "Calls the parent class's implementation of an overridden method.",
+      "collection": "Method calls",
+      "code": ".method public toString()Ljava/lang/String;\n    .locals 2\n\n    invoke-super {p0}, Ljava/lang/Object;->toString()Ljava/lang/String;\n\n    move-result-object v0\n\n    const-string v1, \"!\"\n\n    invoke-virtual {v0, v1}, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;\n\n    move-result-object v0\n\n    return-object v0\n.end method\n",
+      "tags": [
+        "invoke-super",
+        "override",
+        "inheritance"
+      ]
+    },
+    {
+      "id": "invoke-interface-call",
+      "title": "invoke-interface",
+      "description": "Used when the static type is an interface; List.size() and Runnable.run() are typical examples.",
+      "collection": "Method calls",
+      "code": ".method public static run(Ljava/util/List;Ljava/lang/Runnable;)I\n    .locals 1\n\n    invoke-interface {p1}, Ljava/lang/Runnable;->run()V\n\n    invoke-interface {p0}, Ljava/util/List;->size()I\n\n    move-result v0\n\n    return v0\n.end method\n",
+      "tags": [
+        "invoke-interface",
+        "List",
+        "Runnable"
+      ]
+    },
+    {
+      "id": "invoke-range-call",
+      "title": "invoke-static/range with 6 arguments",
+      "description": "Plain invoke allows 5 argument registers; more need the /range form with consecutive registers.",
+      "collection": "Method calls",
+      "code": ".method public static call()I\n    .locals 6\n\n    const/4 v0, 0x1\n\n    const/4 v1, 0x2\n\n    const/4 v2, 0x3\n\n    const/4 v3, 0x4\n\n    const/4 v4, 0x5\n\n    const/4 v5, 0x6\n\n    invoke-static/range {v0 .. v5}, Lcom/acme/demo/Util;->sum6(IIIIII)I\n\n    move-result v0\n\n    return v0\n.end method\n",
+      "tags": [
+        "invoke-range",
+        "range",
+        "arguments"
+      ]
+    },
+    {
+      "id": "invoke-wide-arguments",
+      "title": "Calling a method with long arguments",
+      "description": "Every long or double argument counts as two registers in the invoke list: (v0, v1) and (v2, v3).",
+      "collection": "Method calls",
+      "code": ".method public static biggest()J\n    .locals 4\n\n    const-wide/16 v0, 0x5\n\n    const-wide/16 v2, 0x9\n\n    invoke-static {v0, v1, v2, v3}, Ljava/lang/Math;->max(JJ)J\n\n    move-result-wide v0\n\n    return-wide v0\n.end method\n",
+      "tags": [
+        "wide",
+        "long",
+        "Math.max",
+        "invoke-static"
+      ]
+    },
+    {
+      "id": "log-d-call",
+      "title": "Android Log.d",
+      "description": "Log.d(String tag, String message) is a static call returning an int that is ignored here.",
+      "collection": "Method calls",
+      "code": ".method private logHello()V\n    .locals 2\n\n    const-string v0, \"MainActivity\"\n\n    const-string v1, \"Hello from smali\"\n\n    invoke-static {v0, v1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I\n\n    return-void\n.end method\n",
+      "tags": [
+        "Log",
+        "android",
+        "debug",
+        "invoke-static"
+      ]
+    },
+    {
+      "id": "call-chain",
+      "title": "Chained calls with move-result-object",
+      "description": "a.b().c(): each result must be captured with move-result-object before it is used as the next receiver.",
+      "collection": "Method calls",
+      "code": ".method public static trimmedLength(Ljava/lang/String;)I\n    .locals 1\n\n    invoke-virtual {p0}, Ljava/lang/String;->trim()Ljava/lang/String;\n\n    move-result-object v0\n\n    invoke-virtual {v0}, Ljava/lang/String;->length()I\n\n    move-result v0\n\n    return v0\n.end method\n",
+      "tags": [
+        "chain",
+        "move-result-object",
+        "trim",
+        "length"
+      ]
+    },
+    {
+      "id": "println-int",
+      "title": "System.out.println(int)",
+      "description": "Overload resolution is explicit in smali: println(I)V is a different method from println(Ljava/lang/String;)V.",
+      "collection": "Method calls",
+      "code": ".method public static show(I)V\n    .locals 1\n\n    sget-object v0, Ljava/lang/System;->out:Ljava/io/PrintStream;\n\n    invoke-virtual {v0, p0}, Ljava/io/PrintStream;->println(I)V\n\n    return-void\n.end method\n",
+      "tags": [
+        "println",
+        "overload",
+        "int"
+      ]
+    },
+    {
+      "id": "start-activity",
+      "title": "Start an Activity with an Intent",
+      "description": "Creates an Intent for a target class and calls startActivity on this (a Context).",
+      "collection": "Method calls",
+      "code": ".method private openSettings()V\n    .locals 2\n\n    new-instance v0, Landroid/content/Intent;\n\n    const-class v1, Lcom/acme/demo/SettingsActivity;\n\n    invoke-direct {v0, p0, v1}, Landroid/content/Intent;-><init>(Landroid/content/Context;Ljava/lang/Class;)V\n\n    invoke-virtual {p0, v0}, Landroid/app/Activity;->startActivity(Landroid/content/Intent;)V\n\n    return-void\n.end method\n",
+      "tags": [
+        "android",
+        "intent",
+        "startActivity",
+        "context"
+      ]
+    },
+    {
+      "id": "try-catch",
+      "title": "try / catch",
+      "description": "The .catch directive maps a protected instruction range to a handler; the handler starts with move-exception.",
+      "collection": "Exceptions",
+      "code": ".method public static parse(Ljava/lang/String;)I\n    .locals 2\n\n    :try_start_0\n    invoke-static {p0}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I\n\n    move-result v0\n    :try_end_0\n    .catch Ljava/lang/NumberFormatException; {:try_start_0 .. :try_end_0} :catch_0\n\n    return v0\n\n    :catch_0\n    move-exception v1\n\n    const/4 v0, -0x1\n\n    return v0\n.end method\n",
+      "tags": [
+        "try",
+        "catch",
+        "move-exception",
+        "NumberFormatException"
+      ]
+    },
+    {
+      "id": "try-catch-finally",
+      "title": "try / finally",
+      "description": "The finally body is duplicated: once on the normal path and once in a catch-all handler that rethrows.",
+      "collection": "Exceptions",
+      "code": ".method public static guarded(Ljava/lang/Runnable;)V\n    .locals 3\n\n    :try_start_0\n    invoke-interface {p0}, Ljava/lang/Runnable;->run()V\n    :try_end_0\n    .catchall {:try_start_0 .. :try_end_0} :catchall_0\n\n    sget-object v0, Ljava/lang/System;->out:Ljava/io/PrintStream;\n\n    const-string v1, \"cleanup\"\n\n    invoke-virtual {v0, v1}, Ljava/io/PrintStream;->println(Ljava/lang/String;)V\n\n    return-void\n\n    :catchall_0\n    move-exception v0\n\n    sget-object v1, Ljava/lang/System;->out:Ljava/io/PrintStream;\n\n    const-string v2, \"cleanup\"\n\n    invoke-virtual {v1, v2}, Ljava/io/PrintStream;->println(Ljava/lang/String;)V\n\n    throw v0\n.end method\n",
+      "tags": [
+        "finally",
+        "catchall",
+        "throw",
+        "try"
+      ]
+    },
+    {
+      "id": "multi-catch",
+      "title": "Two catch blocks",
+      "description": "Handlers are tried in the order the .catch lines appear, so list specific exceptions first.",
+      "collection": "Exceptions",
+      "code": ".method public static read(Ljava/lang/String;)I\n    .locals 2\n\n    :try_start_0\n    invoke-static {p0}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I\n\n    move-result v0\n    :try_end_0\n    .catch Ljava/lang/NumberFormatException; {:try_start_0 .. :try_end_0} :catch_0\n    .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_1\n\n    return v0\n\n    :catch_0\n    move-exception v1\n\n    const/4 v0, -0x1\n\n    return v0\n\n    :catch_1\n    move-exception v1\n\n    const/4 v0, -0x2\n\n    return v0\n.end method\n",
+      "tags": [
+        "catch",
+        "multi-catch",
+        "handler-order"
+      ]
+    },
+    {
+      "id": "throw-exception",
+      "title": "Throw a new exception with a message",
+      "description": "new-instance, invoke-direct with the message, then throw. Code after throw is unreachable.",
+      "collection": "Exceptions",
+      "code": ".method public static positive(I)I\n    .locals 2\n\n    if-gtz p0, :cond_0\n\n    new-instance v0, Ljava/lang/IllegalArgumentException;\n\n    const-string v1, \"value must be positive\"\n\n    invoke-direct {v0, v1}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V\n\n    throw v0\n\n    :cond_0\n    return p0\n.end method\n",
+      "tags": [
+        "throw",
+        "new-instance",
+        "IllegalArgumentException"
+      ]
+    },
+    {
+      "id": "custom-exception-class",
+      "title": "Custom exception class",
+      "description": "A checked exception: extends Exception and forwards its message to the superclass constructor.",
+      "collection": "Exceptions",
+      "code": ".class public Lcom/acme/demo/AppException;\n.super Ljava/lang/Exception;\n\n\n# direct methods\n.method public constructor <init>(Ljava/lang/String;)V\n    .locals 0\n\n    invoke-direct {p0, p1}, Ljava/lang/Exception;-><init>(Ljava/lang/String;)V\n\n    return-void\n.end method\n",
+      "tags": [
+        "custom-exception",
+        "class",
+        "super"
+      ]
+    },
+    {
+      "id": "throw-custom-exception",
+      "title": "Throw a custom exception",
+      "description": "A method that can throw a checked exception declares it with a dalvik Throws annotation.",
+      "collection": "Exceptions",
+      "code": ".method public static check(Z)V\n    .locals 2\n    .annotation system Ldalvik/annotation/Throws;\n        value = {\n            Lcom/acme/demo/AppException;\n        }\n    .end annotation\n\n    if-nez p0, :cond_0\n\n    new-instance v0, Lcom/acme/demo/AppException;\n\n    const-string v1, \"check failed\"\n\n    invoke-direct {v0, v1}, Lcom/acme/demo/AppException;-><init>(Ljava/lang/String;)V\n\n    throw v0\n\n    :cond_0\n    return-void\n.end method\n",
+      "tags": [
+        "throw",
+        "throws",
+        "annotation",
+        "custom-exception"
+      ]
+    },
+    {
+      "id": "wrap-exception",
+      "title": "Catch and wrap in RuntimeException",
+      "description": "Catches a broad Exception, then throws a new RuntimeException that carries the original as its cause.",
+      "collection": "Exceptions",
+      "code": ".method public static run(Ljava/lang/Runnable;)V\n    .locals 2\n\n    :try_start_0\n    invoke-interface {p0}, Ljava/lang/Runnable;->run()V\n    :try_end_0\n    .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0\n\n    return-void\n\n    :catch_0\n    move-exception v0\n\n    new-instance v1, Ljava/lang/RuntimeException;\n\n    invoke-direct {v1, v0}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/Throwable;)V\n\n    throw v1\n.end method\n",
+      "tags": [
+        "wrap",
+        "cause",
+        "RuntimeException",
+        "catch"
+      ]
+    },
+    {
+      "id": "synchronized-block",
+      "title": "synchronized block",
+      "description": "monitor-enter / monitor-exit around the body; a catch-all releases the lock on the exceptional path too.",
+      "collection": "Exceptions",
+      "code": ".method public bump()V\n    .locals 3\n\n    iget-object v0, p0, Lcom/acme/demo/Counter;->lock:Ljava/lang/Object;\n\n    monitor-enter v0\n\n    :try_start_0\n    iget v1, p0, Lcom/acme/demo/Counter;->count:I\n\n    add-int/lit8 v1, v1, 0x1\n\n    iput v1, p0, Lcom/acme/demo/Counter;->count:I\n\n    monitor-exit v0\n    :try_end_0\n    .catchall {:try_start_0 .. :try_end_0} :catchall_0\n\n    return-void\n\n    :catchall_0\n    move-exception v1\n\n    :try_start_1\n    monitor-exit v0\n    :try_end_1\n    .catchall {:try_start_1 .. :try_end_1} :catchall_0\n\n    throw v1\n.end method\n",
+      "tags": [
+        "synchronized",
+        "monitor-enter",
+        "monitor-exit",
+        "lock"
+      ]
+    },
+    {
+      "id": "synchronized-method",
+      "title": "synchronized method (declared-synchronized)",
+      "description": "In DEX the ACC_SYNCHRONIZED flag is only valid on native methods, so a source-level synchronized method is compiled with an explicit monitor-enter / monitor-exit on this. Tools show the informational declared-synchronized flag.",
+      "collection": "Exceptions",
+      "code": ".method public declared-synchronized increment()V\n    .locals 2\n\n    monitor-enter p0\n\n    :try_start_0\n    iget v0, p0, Lcom/acme/demo/Counter;->count:I\n\n    add-int/lit8 v0, v0, 0x1\n\n    iput v0, p0, Lcom/acme/demo/Counter;->count:I\n    :try_end_0\n    .catchall {:try_start_0 .. :try_end_0} :catchall_0\n\n    monitor-exit p0\n\n    return-void\n\n    :catchall_0\n    move-exception v0\n\n    monitor-exit p0\n\n    throw v0\n.end method\n",
+      "tags": [
+        "synchronized",
+        "modifier",
+        "method"
+      ]
+    }
+  ]
+}

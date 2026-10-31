@@ -1,0 +1,5866 @@
+
+
+
+
+
+
+
+
+
+<!doctype html>
+<html 
+      lang="en"
+      dir="ltr">
+  <head>
+    <meta name="google-signin-client-id" content="721724668570-nbkv1cfusk7kk4eni4pjvepaus73b13t.apps.googleusercontent.com"><meta name="google-signin-scope"
+          content="profile email https://www.googleapis.com/auth/developerprofiles https://www.googleapis.com/auth/developerprofiles.award https://www.googleapis.com/auth/devprofiles.full_control.firstparty"><meta property="og:site_name" content="Android Open Source Project">
+    <meta property="og:type" content="website"><meta name="theme-color" content="#34a853"><meta charset="utf-8">
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <link rel="manifest" href="/_pwa/androidsource/manifest.json"
+          crossorigin="use-credentials">
+    <link rel="preconnect" href="//www.gstatic.com" crossorigin>
+    <link rel="preconnect" href="//fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="//www.google-analytics.com" crossorigin><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Google+Sans:400,500,600,700|Google+Sans+Text:400,400italic,500,500italic,600,600italic,700,700italic|Roboto+Mono:400,500,700&display=swap">
+      <link rel="stylesheet"
+            href="//fonts.googleapis.com/css2?family=Material+Icons&family=Material+Symbols+Outlined&display=block"><link rel="stylesheet" href="https://www.gstatic.com/devrel-devsite/prod/ve828226d17bf98b2ac333a1bbe96ed6401cc6183d543bad39ccac2722acbc6a7/androidsource/css/app.css">
+      
+        <link rel="stylesheet" href="https://www.gstatic.com/devrel-devsite/prod/ve828226d17bf98b2ac333a1bbe96ed6401cc6183d543bad39ccac2722acbc6a7/androidsource/css/dark-theme.css" disabled>
+      <link rel="shortcut icon" href="https://www.gstatic.com/devrel-devsite/prod/ve828226d17bf98b2ac333a1bbe96ed6401cc6183d543bad39ccac2722acbc6a7/androidsource/images/favicon.svg">
+    <link rel="apple-touch-icon" href="https://www.gstatic.com/devrel-devsite/prod/ve828226d17bf98b2ac333a1bbe96ed6401cc6183d543bad39ccac2722acbc6a7/androidsource/images/touchicon-180.png"><link rel="canonical" href="https://source.android.com/docs/core/runtime/instruction-formats"><link rel="search" type="application/opensearchdescription+xml"
+            title="Android Open Source Project" href="https://source.android.com/s/opensearch.xml">
+      <link rel="alternate" hreflang="en"
+          href="https://source.android.com/docs/core/runtime/instruction-formats" /><link rel="alternate" hreflang="x-default" href="https://source.android.com/docs/core/runtime/instruction-formats" /><link rel="alternate" hreflang="ar"
+          href="https://source.android.com/docs/core/runtime/instruction-formats?hl=ar" /><link rel="alternate" hreflang="bn"
+          href="https://source.android.com/docs/core/runtime/instruction-formats?hl=bn" /><link rel="alternate" hreflang="zh-Hans"
+          href="https://source.android.com/docs/core/runtime/instruction-formats?hl=zh-cn" /><link rel="alternate" hreflang="zh-Hant"
+          href="https://source.android.com/docs/core/runtime/instruction-formats?hl=zh-tw" /><link rel="alternate" hreflang="fa"
+          href="https://source.android.com/docs/core/runtime/instruction-formats?hl=fa" /><link rel="alternate" hreflang="fr"
+          href="https://source.android.com/docs/core/runtime/instruction-formats?hl=fr" /><link rel="alternate" hreflang="de"
+          href="https://source.android.com/docs/core/runtime/instruction-formats?hl=de" /><link rel="alternate" hreflang="he"
+          href="https://source.android.com/docs/core/runtime/instruction-formats?hl=he" /><link rel="alternate" hreflang="hi"
+          href="https://source.android.com/docs/core/runtime/instruction-formats?hl=hi" /><link rel="alternate" hreflang="id"
+          href="https://source.android.com/docs/core/runtime/instruction-formats?hl=id" /><link rel="alternate" hreflang="it"
+          href="https://source.android.com/docs/core/runtime/instruction-formats?hl=it" /><link rel="alternate" hreflang="ja"
+          href="https://source.android.com/docs/core/runtime/instruction-formats?hl=ja" /><link rel="alternate" hreflang="ko"
+          href="https://source.android.com/docs/core/runtime/instruction-formats?hl=ko" /><link rel="alternate" hreflang="pl"
+          href="https://source.android.com/docs/core/runtime/instruction-formats?hl=pl" /><link rel="alternate" hreflang="pt-BR"
+          href="https://source.android.com/docs/core/runtime/instruction-formats?hl=pt-br" /><link rel="alternate" hreflang="ru"
+          href="https://source.android.com/docs/core/runtime/instruction-formats?hl=ru" /><link rel="alternate" hreflang="es-419"
+          href="https://source.android.com/docs/core/runtime/instruction-formats?hl=es-419" /><link rel="alternate" hreflang="th"
+          href="https://source.android.com/docs/core/runtime/instruction-formats?hl=th" /><link rel="alternate" hreflang="tr"
+          href="https://source.android.com/docs/core/runtime/instruction-formats?hl=tr" /><link rel="alternate" hreflang="vi"
+          href="https://source.android.com/docs/core/runtime/instruction-formats?hl=vi" /><title>Dalvik executable instruction formats &nbsp;|&nbsp; Android OS core topics &nbsp;|&nbsp; Android Open Source Project</title>
+
+<meta property="og:title" content="Dalvik executable instruction formats &nbsp;|&nbsp; Android OS core topics &nbsp;|&nbsp; Android Open Source Project"><meta property="og:url" content="https://source.android.com/docs/core/runtime/instruction-formats"><meta property="og:locale" content="en"><script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    
+    "headline": "Dalvik executable instruction formats"
+  }
+</script><script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Docs",
+      "item": "https://source.android.com/docs"
+    },{
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Core topics",
+      "item": "https://source.android.com/docs/core"
+    },{
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Dalvik executable instruction formats",
+      "item": "https://source.android.com/docs/core/runtime/instruction-formats"
+    }]
+  }
+  </script>
+  
+    
+    
+    
+    
+  
+
+    </head>
+  <body class="color-scheme--light"
+        template="page"
+        theme="androidsource-theme"
+        type="article"
+        
+        appearance
+        
+        layout="docs"
+        
+        
+        
+        
+        
+        display-toc
+        pending>
+  
+    <devsite-progress type="indeterminate" id="app-progress"></devsite-progress>
+  
+  
+    <a href="#main-content" class="skip-link button">
+      
+      Skip to main content
+    </a>
+    <section class="devsite-wrapper">
+      <devsite-cookie-notification-bar></devsite-cookie-notification-bar>
+        <devsite-header role="banner" keep-tabs-visible>
+  
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="devsite-header--inner" data-nosnippet>
+  <div class="devsite-top-logo-row-wrapper-wrapper">
+    <div class="devsite-top-logo-row-wrapper">
+      <div class="devsite-top-logo-row">
+        <button type="button" id="devsite-hamburger-menu"
+          class="devsite-header-icon-button button-flat material-icons gc-analytics-event"
+          data-category="Site-Wide Custom Events"
+          data-label="Navigation menu button"
+          visually-hidden
+          aria-label="Open menu">
+        </button>
+        
+<div class="devsite-product-name-wrapper">
+
+  <a href="/" class="devsite-site-logo-link gc-analytics-event"
+   data-category="Site-Wide Custom Events" data-label="Site logo" track-type="globalNav"
+   track-name="androidOpenSourceProject" track-metadata-position="nav"
+   track-metadata-eventDetail="nav">
+  
+  <picture>
+    
+    <source srcset="https://www.gstatic.com/devrel-devsite/prod/ve828226d17bf98b2ac333a1bbe96ed6401cc6183d543bad39ccac2722acbc6a7/androidsource/images/lockup-dark-theme.png"
+            media="(prefers-color-scheme: dark)"
+            class="devsite-dark-theme">
+    
+    <img src="https://www.gstatic.com/devrel-devsite/prod/ve828226d17bf98b2ac333a1bbe96ed6401cc6183d543bad39ccac2722acbc6a7/androidsource/images/lockup.png" class="devsite-site-logo" alt="Android Open Source Project">
+  </picture>
+  
+</a>
+
+
+
+</div>
+        <div class="devsite-top-logo-row-middle">
+          <div class="devsite-header-upper-tabs">
+            
+              
+              
+  <devsite-tabs class="upper-tabs">
+
+    <nav class="devsite-tabs-wrapper" aria-label="Upper tabs">
+      
+        
+          <tab class="devsite-dropdown
+    
+    devsite-active
+    
+    ">
+  
+    <a href="https://source.android.com/docs"
+    class="devsite-tabs-content gc-analytics-event "
+      track-metadata-eventdetail="https://source.android.com/docs"
+    
+       track-type="nav"
+       track-metadata-position="nav - docs"
+       track-metadata-module="primary nav"
+       aria-label="Docs, selected" 
+       
+         
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Tab: Docs"
+         
+           track-name="docs"
+         
+       >
+    Docs
+  
+    </a>
+    
+      <button
+         aria-haspopup="menu"
+         aria-expanded="false"
+         aria-label="Dropdown menu for Docs"
+         track-type="nav"
+         track-metadata-eventdetail="https://source.android.com/docs"
+         track-metadata-position="nav - docs"
+         track-metadata-module="primary nav"
+         
+          
+            data-category="Site-Wide Custom Events"
+          
+            data-label="Tab: Docs"
+          
+            track-name="docs"
+          
+        
+         class="devsite-tabs-dropdown-toggle devsite-icon devsite-icon-arrow-drop-down"></button>
+    
+  
+  <div class="devsite-tabs-dropdown" role="menu" aria-label="submenu" hidden>
+    <div class="devsite-tabs-dropdown-content">
+      
+      
+        <div class="devsite-tabs-dropdown-column
+                    android-source-tabs-dropdown-column-small">
+          
+            <ul class="devsite-tabs-dropdown-section
+                       ">
+              
+                <li class="devsite-nav-title" role="heading" tooltip>What&#39;s new?</li>
+              
+              
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/whatsnew/release-notes"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/whatsnew/release-notes"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="what&#39;s new?"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Release notes
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/whatsnew/latest-security-bulletins"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/whatsnew/latest-security-bulletins"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="what&#39;s new?"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Latest security bulletins
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/whatsnew/latest-cdd"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/whatsnew/latest-cdd"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="what&#39;s new?"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Latest Compatibility Definition Document (CDD)
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/whatsnew/site-updates"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/whatsnew/site-updates"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="what&#39;s new?"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Site updates
+                    </div>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          
+            <ul class="devsite-tabs-dropdown-section
+                       ">
+              
+                <li class="devsite-nav-title" role="heading" tooltip>Getting Started</li>
+              
+              
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/setup/about"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/setup/about"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="what&#39;s new?"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      About
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/setup/start"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/setup/start"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="what&#39;s new?"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Start
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/setup/download"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/setup/download"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="what&#39;s new?"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Download
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/setup/build"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/setup/build"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="what&#39;s new?"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Builds
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/setup/test"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/setup/test"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="what&#39;s new?"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Test
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/setup/create/coding-tasks"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/setup/create/coding-tasks"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="what&#39;s new?"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Create
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/setup/contribute"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/setup/contribute"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="what&#39;s new?"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Contribute
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/setup/community/cofc"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/setup/community/cofc"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="what&#39;s new?"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Community
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/setup/reference"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/setup/reference"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="what&#39;s new?"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Tools, build, and related reference
+                    </div>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          
+            <ul class="devsite-tabs-dropdown-section
+                       ">
+              
+                <li class="devsite-nav-title" role="heading" tooltip>Security</li>
+              
+              
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/security"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/security"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="what&#39;s new?"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Overview
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/security/bulletin"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/security/bulletin"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="what&#39;s new?"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Bulletins
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/security/features"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/security/features"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="what&#39;s new?"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Features
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/security/test/fuzz-sanitize"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/security/test/fuzz-sanitize"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="what&#39;s new?"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Testing
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/security/best-practices"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/security/best-practices"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="what&#39;s new?"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Best Practices
+                    </div>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </div>
+      
+        <div class="devsite-tabs-dropdown-column
+                    android-source-tabs-dropdown-column-small">
+          
+            <ul class="devsite-tabs-dropdown-section
+                       ">
+              
+                <li class="devsite-nav-title" role="heading" tooltip>Core Topics</li>
+              
+              
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/core/architecture"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/core/architecture"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="core topics"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Architecture
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/core/audio"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/core/audio"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="core topics"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Audio
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/core/camera"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/core/camera"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="core topics"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Camera
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/core/connect"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/core/connect"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="core topics"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Connectivity
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/core/data"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/core/data"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="core topics"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Data
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/core/display"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/core/display"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="core topics"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Display
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/core/fonts/custom-font-fallback"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/core/fonts/custom-font-fallback"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="core topics"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Fonts
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/core/graphics"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/core/graphics"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="core topics"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Graphics
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/core/interaction"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/core/interaction"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="core topics"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Interaction
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/core/media"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/core/media"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="core topics"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Media
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/core/perf"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/core/perf"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="core topics"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Performance
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/core/permissions"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/core/permissions"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="core topics"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Permissions
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/core/power"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/core/power"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="core topics"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Power
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/core/runtime"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/core/runtime"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="core topics"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Runtime
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/core/settings"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/core/settings"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="core topics"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Settings
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/core/storage"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/core/storage"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="core topics"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Storage
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/core/tests"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/core/tests"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="core topics"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Tests
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/core/ota"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/core/ota"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="core topics"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Updates
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/core/virtualization"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/core/virtualization"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="core topics"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Virtualization
+                    </div>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </div>
+      
+        <div class="devsite-tabs-dropdown-column
+                    android-source-tabs-dropdown-column-small">
+          
+            <ul class="devsite-tabs-dropdown-section
+                       ">
+              
+                <li class="devsite-nav-title" role="heading" tooltip>Compatibility</li>
+              
+              
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/compatibility/cdd"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/compatibility/cdd"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="compatibility"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Compatibility Definition Document (CDD)
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/compatibility/cts"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/compatibility/cts"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="compatibility"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Compatibility Test Suite (CTS)
+                    </div>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          
+            <ul class="devsite-tabs-dropdown-section
+                       ">
+              
+                <li class="devsite-nav-title" role="heading" tooltip>Android Devices</li>
+              
+              
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/devices"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/devices"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="compatibility"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Overview
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/devices/cuttlefish"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/devices/cuttlefish"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="compatibility"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Cuttlefish
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/devices/admin"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/devices/admin"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="compatibility"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Enterprise
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/devices/tv"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/devices/tv"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="compatibility"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      TV
+                    </div>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          
+            <ul class="devsite-tabs-dropdown-section
+                       ">
+              
+                <li class="devsite-nav-title" role="heading" tooltip>Automotive</li>
+              
+              
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/automotive"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/automotive"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="compatibility"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Overview
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/automotive/sdv"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/automotive/sdv"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="compatibility"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Software Defined Vehicle
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/automotive/ivi"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/automotive/ivi"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="compatibility"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      In-vehicle Infotainment
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/docs/automotive/start/releases"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/docs/automotive/start/releases"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="compatibility"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Release Details
+                    </div>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          
+            <ul class="devsite-tabs-dropdown-section
+                       ">
+              
+                <li class="devsite-nav-title" role="heading" tooltip>Reference</li>
+              
+              
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/reference/hidl"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/reference/hidl"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="compatibility"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      HIDL
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/reference/hal"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/reference/hal"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="compatibility"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      HAL
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/reference/tradefed/classes"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/reference/tradefed/classes"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="compatibility"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Trade Federation
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://source.android.com/reference/sts/classes"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://source.android.com/reference/sts/classes"
+                     track-metadata-position="nav - docs"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="compatibility"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Security Test Suite
+                    </div>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </div>
+      
+    </div>
+  </div>
+</tab>
+        
+      
+        
+          <tab  >
+            
+    <a href="https://cs.android.com/android/platform/superproject"
+    class="devsite-tabs-content gc-analytics-event "
+      track-metadata-eventdetail="https://cs.android.com/android/platform/superproject"
+    
+       track-type="nav"
+       track-metadata-position="nav - android code search"
+       track-metadata-module="primary nav"
+       
+       
+         
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Tab: Android Code Search"
+         
+           track-name="android code search"
+         
+       >
+    Android Code Search
+  
+    </a>
+    
+  
+          </tab>
+        
+      
+    </nav>
+
+  </devsite-tabs>
+
+            
+           </div>
+          
+<devsite-search
+    enable-signin
+    enable-search
+    enable-suggestions
+      enable-query-completion
+    
+    
+    project-name="Android OS core topics"
+    tenant-name="Android Open Source Project"
+    project-scope="/docs/core"
+    url-scoped="https://source.android.com/s/results/docs/core"
+    
+    
+    
+    >
+  <form class="devsite-search-form" action="https://source.android.com/s/results" method="GET">
+    <div class="devsite-search-container">
+      <button type="button"
+              search-open
+              class="devsite-search-button devsite-header-icon-button button-flat material-icons"
+              
+              aria-label="Open search"></button>
+      <div class="devsite-searchbox">
+        <input
+          aria-activedescendant=""
+          aria-autocomplete="list"
+          
+          aria-label="Search"
+          aria-expanded="false"
+          aria-haspopup="listbox"
+          autocomplete="off"
+          class="devsite-search-field devsite-search-query"
+          name="q"
+          
+          placeholder="Search"
+          role="combobox"
+          type="text"
+          value=""
+          >
+          <div class="devsite-search-image material-icons" aria-hidden="true">
+            
+          </div>
+          <div class="devsite-search-shortcut-icon-container" aria-hidden="true">
+            <kbd class="devsite-search-shortcut-icon">/</kbd>
+          </div>
+      </div>
+    </div>
+  </form>
+  <button type="button"
+          search-close
+          class="devsite-search-button devsite-header-icon-button button-flat material-icons"
+          
+          aria-label="Close search"></button>
+</devsite-search>
+
+        </div>
+
+        
+
+          
+
+          
+
+          
+
+          <devsite-appearance-selector></devsite-appearance-selector>
+
+          
+<devsite-language-selector>
+  <ul role="presentation">
+    
+    
+    <li role="presentation">
+      <a role="menuitem" lang="en"
+        >English</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="de"
+        >Deutsch</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="es_419"
+        >Español – América Latina</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="fr"
+        >Français</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="id"
+        >Indonesia</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="it"
+        >Italiano</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="pl"
+        >Polski</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="pt_br"
+        >Português – Brasil</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="vi"
+        >Tiếng Việt</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="tr"
+        >Türkçe</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ru"
+        >Русский</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="he"
+        >עברית</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ar"
+        >العربيّة</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="fa"
+        >فارسی</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="hi"
+        >हिंदी</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="bn"
+        >বাংলা</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="th"
+        >ภาษาไทย</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="zh_cn"
+        >中文 – 简体</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="zh_tw"
+        >中文 – 繁體</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ja"
+        >日本語</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ko"
+        >한국어</a>
+    </li>
+    
+  </ul>
+</devsite-language-selector>
+
+
+          
+
+        
+
+        
+          <devsite-user 
+                        
+                        
+                          enable-profiles
+                        
+                        
+                        id="devsite-user">
+            
+              
+              <span class="button devsite-top-button" aria-hidden="true" visually-hidden>Sign in</span>
+            
+          </devsite-user>
+        
+        
+        
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="devsite-collapsible-section
+    ">
+    <div class="devsite-header-background">
+      
+        
+          <div class="devsite-product-id-row"
+           >
+            <div class="devsite-product-description-row">
+              
+                
+                <div class="devsite-product-id">
+                  
+                  
+                  
+                    <ul class="devsite-breadcrumb-list"
+  
+    aria-label="Lower header breadcrumb">
+  
+  <li class="devsite-breadcrumb-item
+             ">
+    
+    
+    
+      
+        
+  <a href="https://source.android.com/docs"
+      
+        class="devsite-breadcrumb-link gc-analytics-event"
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Lower Header"
+      
+        data-value="1"
+      
+        track-type="globalNav"
+      
+        track-name="breadcrumb"
+      
+        track-metadata-position="1"
+      
+        track-metadata-eventdetail="Documentation"
+      
+    >
+    
+          Docs
+        
+  </a>
+  
+      
+    
+  </li>
+  
+  <li class="devsite-breadcrumb-item
+             ">
+    
+      
+      <div class="devsite-breadcrumb-guillemet material-icons" aria-hidden="true"></div>
+    
+    
+    
+      
+        
+  <a href="https://source.android.com/docs/core"
+      
+        class="devsite-breadcrumb-link gc-analytics-event"
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Lower Header"
+      
+        data-value="2"
+      
+        track-type="globalNav"
+      
+        track-name="breadcrumb"
+      
+        track-metadata-position="2"
+      
+        track-metadata-eventdetail="Android OS core topics"
+      
+    >
+    
+          Core topics
+        
+  </a>
+  
+      
+    
+  </li>
+  
+</ul>
+                </div>
+                
+              
+              
+            </div>
+            
+          </div>
+          
+        
+      
+      
+        <div class="devsite-doc-set-nav-row">
+          
+          
+            
+            
+  <devsite-tabs class="lower-tabs">
+
+    <nav class="devsite-tabs-wrapper" aria-label="Lower tabs">
+      
+        
+          <tab  >
+            
+    <a href="https://source.android.com/docs/core"
+    class="devsite-tabs-content gc-analytics-event "
+      track-metadata-eventdetail="https://source.android.com/docs/core"
+    
+       track-type="nav"
+       track-metadata-position="nav - overview"
+       track-metadata-module="primary nav"
+       
+       
+         
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Tab: Overview"
+         
+           track-name="overview"
+         
+       >
+    Overview
+  
+    </a>
+    
+  
+          </tab>
+        
+      
+        
+          <tab  >
+            
+    <a href="https://source.android.com/docs/core/architecture"
+    class="devsite-tabs-content gc-analytics-event "
+      track-metadata-eventdetail="https://source.android.com/docs/core/architecture"
+    
+       track-type="nav"
+       track-metadata-position="nav - architecture and platform"
+       track-metadata-module="primary nav"
+       
+       
+         
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Tab: Architecture and Platform"
+         
+           track-name="architecture and platform"
+         
+       >
+    Architecture and Platform
+  
+    </a>
+    
+  
+          </tab>
+        
+      
+        
+          <tab  >
+            
+    <a href="https://source.android.com/docs/core/connect"
+    class="devsite-tabs-content gc-analytics-event "
+      track-metadata-eventdetail="https://source.android.com/docs/core/connect"
+    
+       track-type="nav"
+       track-metadata-position="nav - connectivity and input"
+       track-metadata-module="primary nav"
+       
+       
+         
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Tab: Connectivity and Input"
+         
+           track-name="connectivity and input"
+         
+       >
+    Connectivity and Input
+  
+    </a>
+    
+  
+          </tab>
+        
+      
+        
+          <tab  >
+            
+    <a href="https://source.android.com/docs/core/audio"
+    class="devsite-tabs-content gc-analytics-event "
+      track-metadata-eventdetail="https://source.android.com/docs/core/audio"
+    
+       track-type="nav"
+       track-metadata-position="nav - media and display"
+       track-metadata-module="primary nav"
+       
+       
+         
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Tab: Media and Display"
+         
+           track-name="media and display"
+         
+       >
+    Media and Display
+  
+    </a>
+    
+  
+          </tab>
+        
+      
+        
+          <tab  class="devsite-active">
+            
+    <a href="https://source.android.com/docs/core/perf"
+    class="devsite-tabs-content gc-analytics-event "
+      track-metadata-eventdetail="https://source.android.com/docs/core/perf"
+    
+       track-type="nav"
+       track-metadata-position="nav - system health and updates"
+       track-metadata-module="primary nav"
+       aria-label="System health and Updates, selected" 
+       
+         
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Tab: System health and Updates"
+         
+           track-name="system health and updates"
+         
+       >
+    System health and Updates
+  
+    </a>
+    
+  
+          </tab>
+        
+      
+        
+          <tab  >
+            
+    <a href="https://source.android.com/docs/core/tests"
+    class="devsite-tabs-content gc-analytics-event "
+      track-metadata-eventdetail="https://source.android.com/docs/core/tests"
+    
+       track-type="nav"
+       track-metadata-position="nav - testing"
+       track-metadata-module="primary nav"
+       
+       
+         
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Tab: Testing"
+         
+           track-name="testing"
+         
+       >
+    Testing
+  
+    </a>
+    
+  
+          </tab>
+        
+      
+        
+          <tab  >
+            
+    <a href="https://source.android.com/docs/core/data"
+    class="devsite-tabs-content gc-analytics-event "
+      track-metadata-eventdetail="https://source.android.com/docs/core/data"
+    
+       track-type="nav"
+       track-metadata-position="nav - data storage and access"
+       track-metadata-module="primary nav"
+       
+       
+         
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Tab: Data storage and access"
+         
+           track-name="data storage and access"
+         
+       >
+    Data storage and access
+  
+    </a>
+    
+  
+          </tab>
+        
+      
+    </nav>
+
+  </devsite-tabs>
+
+          
+          
+        </div>
+      
+    </div>
+  </div>
+
+</div>
+
+
+
+  
+
+  
+</devsite-header>
+        <devsite-book-nav scrollbars >
+          
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="devsite-book-nav-filter"
+     >
+  <span class="filter-list-icon material-icons" aria-hidden="true"></span>
+  <input type="text"
+         placeholder="Filter"
+         
+         aria-label="Type to filter"
+         role="searchbox">
+  
+  <span class="filter-clear-button hidden"
+        data-title="Clear filter"
+        aria-label="Clear filter"
+        role="button"
+        tabindex="0"></span>
+</div>
+
+<nav class="devsite-book-nav devsite-nav nocontent" data-nosnippet
+     aria-label="Side menu">
+  <div class="devsite-mobile-header">
+    <button type="button"
+            id="devsite-close-nav"
+            class="devsite-header-icon-button button-flat material-icons gc-analytics-event"
+            data-category="Site-Wide Custom Events"
+            data-label="Close navigation"
+            aria-label="Close navigation">
+    </button>
+    <div class="devsite-product-name-wrapper">
+
+  <a href="/" class="devsite-site-logo-link gc-analytics-event"
+   data-category="Site-Wide Custom Events" data-label="Site logo" track-type="globalNav"
+   track-name="androidOpenSourceProject" track-metadata-position="nav"
+   track-metadata-eventDetail="nav">
+  
+  <picture>
+    
+    <source srcset="https://www.gstatic.com/devrel-devsite/prod/ve828226d17bf98b2ac333a1bbe96ed6401cc6183d543bad39ccac2722acbc6a7/androidsource/images/lockup-dark-theme.png"
+            media="(prefers-color-scheme: dark)"
+            class="devsite-dark-theme">
+    
+    <img src="https://www.gstatic.com/devrel-devsite/prod/ve828226d17bf98b2ac333a1bbe96ed6401cc6183d543bad39ccac2722acbc6a7/androidsource/images/lockup.png" class="devsite-site-logo" alt="Android Open Source Project">
+  </picture>
+  
+</a>
+
+
+</div>
+  </div>
+
+  <div class="devsite-book-nav-wrapper">
+    <div class="devsite-mobile-nav-top">
+      
+        <ul class="devsite-nav-list">
+          
+            <li class="devsite-nav-item">
+              
+  
+  <a href="/docs"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              devsite-nav-active"
+    
+
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: Docs"
+      
+        track-name="docs"
+      
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Docs"
+     track-type="globalNav"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Docs
+   </span>
+    
+  
+  </a>
+  
+
+  
+    <ul class="devsite-nav-responsive-tabs devsite-nav-has-menu
+               ">
+      
+<li class="devsite-nav-item">
+
+  
+  <span
+    
+       class="devsite-nav-title"
+       tooltip
+    
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: Docs"
+      
+        track-name="docs"
+      
+    >
+  
+    <span class="devsite-nav-text" tooltip menu="Docs">
+      More
+   </span>
+    
+    <span class="devsite-nav-icon material-icons" data-icon="forward"
+          menu="Docs">
+    </span>
+    
+  
+  </span>
+  
+
+</li>
+
+    </ul>
+  
+              
+                <ul class="devsite-nav-responsive-tabs">
+                  
+                    
+                    
+                    
+                    <li class="devsite-nav-item">
+                      
+  
+  <a href="/docs/core"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: Overview"
+      
+        track-name="overview"
+      
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Overview"
+     track-type="globalNav"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Overview
+   </span>
+    
+  
+  </a>
+  
+
+  
+                    </li>
+                  
+                    
+                    
+                    
+                    <li class="devsite-nav-item">
+                      
+  
+  <a href="/docs/core/architecture"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: Architecture and Platform"
+      
+        track-name="architecture and platform"
+      
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Architecture and Platform"
+     track-type="globalNav"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Architecture and Platform
+   </span>
+    
+  
+  </a>
+  
+
+  
+                    </li>
+                  
+                    
+                    
+                    
+                    <li class="devsite-nav-item">
+                      
+  
+  <a href="/docs/core/connect"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: Connectivity and Input"
+      
+        track-name="connectivity and input"
+      
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Connectivity and Input"
+     track-type="globalNav"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Connectivity and Input
+   </span>
+    
+  
+  </a>
+  
+
+  
+                    </li>
+                  
+                    
+                    
+                    
+                    <li class="devsite-nav-item">
+                      
+  
+  <a href="/docs/core/audio"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: Media and Display"
+      
+        track-name="media and display"
+      
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Media and Display"
+     track-type="globalNav"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Media and Display
+   </span>
+    
+  
+  </a>
+  
+
+  
+                    </li>
+                  
+                    
+                    
+                    
+                    <li class="devsite-nav-item">
+                      
+  
+  <a href="/docs/core/perf"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              devsite-nav-active"
+    
+
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: System health and Updates"
+      
+        track-name="system health and updates"
+      
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: System health and Updates"
+     track-type="globalNav"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip menu="_book">
+      System health and Updates
+   </span>
+    
+  
+  </a>
+  
+
+  
+                    </li>
+                  
+                    
+                    
+                    
+                    <li class="devsite-nav-item">
+                      
+  
+  <a href="/docs/core/tests"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: Testing"
+      
+        track-name="testing"
+      
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Testing"
+     track-type="globalNav"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Testing
+   </span>
+    
+  
+  </a>
+  
+
+  
+                    </li>
+                  
+                    
+                    
+                    
+                    <li class="devsite-nav-item">
+                      
+  
+  <a href="/docs/core/data"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: Data storage and access"
+      
+        track-name="data storage and access"
+      
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Data storage and access"
+     track-type="globalNav"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Data storage and access
+   </span>
+    
+  
+  </a>
+  
+
+  
+                    </li>
+                  
+                </ul>
+              
+            </li>
+          
+            <li class="devsite-nav-item">
+              
+  
+  <a href="https://cs.android.com/android/platform/superproject"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: Android Code Search"
+      
+        track-name="android code search"
+      
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Android Code Search"
+     track-type="globalNav"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Android Code Search
+   </span>
+    
+  
+  </a>
+  
+
+  
+              
+            </li>
+          
+          
+          
+        </ul>
+      
+    </div>
+    
+      <div class="devsite-mobile-nav-bottom">
+        
+          
+          <ul class="devsite-nav-list" menu="_book">
+            <li class="devsite-nav-item
+           devsite-nav-expandable
+           devsite-nav-accordion"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Performance</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/docs/core/perf"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Overview</span></a></li><li class="devsite-nav-item"><a href="/docs/core/perf/apk-caching"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>APK caching</span></a></li><li class="devsite-nav-item"><a href="/docs/core/perf/cached-apps-freezer"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Cached apps freezer</span></a></li><li class="devsite-nav-item"><a href="/docs/core/perf/boot-times"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Optimize boot times</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Health</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/docs/core/perf/health"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Overview</span></a></li><li class="devsite-nav-item"><a href="/docs/core/perf/health/implementation-2-1"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Implement Health 2.1</span></a></li></ul></div></li><li class="devsite-nav-item"><a href="/docs/core/perf/cgroups"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Cgroup abstraction layer</span></a></li><li class="devsite-nav-item"><a href="/docs/core/perf/lmkd"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Low memory killer daemon</span></a></li><li class="devsite-nav-item"><a href="/docs/core/perf/autofdo"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Automatic Feedback-Directed Optimization (12 or higher)</span></a></li><li class="devsite-nav-item"><a href="/docs/core/perf/pgo"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Use profile-guided optimization</span></a></li><li class="devsite-nav-item
+           devsite-nav-new"><a href="/docs/core/perf/r8-optimization"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Optimize platform code and resources with R8</span><span class="devsite-nav-icon material-icons"
+        data-icon="new"
+        data-title="New!"
+        aria-hidden="true"></span></a></li><li class="devsite-nav-item"><a href="/docs/core/perf/task-snapshots"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Task snapshots</span></a></li><li class="devsite-nav-item"><a href="/docs/core/perf/compatibility-wal"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Compatibility write-ahead logging</span></a></li><li class="devsite-nav-item"><a href="/docs/core/perf/hiber"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>App hibernation</span></a></li><li class="devsite-nav-item"><a href="/docs/core/perf/performance-hint-api"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Performance Hint API</span></a></li><li class="devsite-nav-item"><a href="/docs/core/perf/boost"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Performance boost for games</span></a></li><li class="devsite-nav-item"><a href="/docs/core/perf/mmevents-stats"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>MM events historical memory statistics</span></a></li><li class="devsite-nav-item
+           devsite-nav-new"><a href="/docs/core/perf/trade-in-mode"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Obtain system health information</span><span class="devsite-nav-icon material-icons"
+        data-icon="new"
+        data-title="New!"
+        aria-hidden="true"></span></a></li><li class="devsite-nav-item
+           devsite-nav-new"><a href="/docs/core/perf/memory-limiter"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Memory Limiter</span><span class="devsite-nav-icon material-icons"
+        data-icon="new"
+        data-title="New!"
+        aria-hidden="true"></span></a></li><li class="devsite-nav-item
+           devsite-nav-new"><a href="/docs/core/perf/system-memory-budgets"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>System memory budgets</span><span class="devsite-nav-icon material-icons"
+        data-icon="new"
+        data-title="New!"
+        aria-hidden="true"></span></a></li><li class="devsite-nav-item
+           devsite-nav-new"><a href="/docs/core/perf/pmgd"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Process memory guardian daemon</span><span class="devsite-nav-icon material-icons"
+        data-icon="new"
+        data-title="New!"
+        aria-hidden="true"></span></a></li><li class="devsite-nav-item
+           devsite-nav-new"><a href="/docs/core/perf/mmd"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Memory management daemon</span><span class="devsite-nav-icon material-icons"
+        data-icon="new"
+        data-title="New!"
+        aria-hidden="true"></span></a></li><li class="devsite-nav-item
+           devsite-nav-new"><a href="/docs/core/perf/npu-manager"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>NPU manager</span><span class="devsite-nav-icon material-icons"
+        data-icon="new"
+        data-title="New!"
+        aria-hidden="true"></span></a></li></ul></div></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable
+           devsite-nav-accordion"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Runtime</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/docs/core/runtime"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Overview</span></a></li><li class="devsite-nav-item"><a href="/docs/core/runtime/art-class-loader-context"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Dexpreopt and &lt;uses-library&gt; checks</span></a></li><li class="devsite-nav-item"><a href="/docs/core/runtime/improvements"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Android 8.0 ART improvements</span></a></li><li class="devsite-nav-item"><a href="/docs/core/runtime/dalvik-bytecode"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Dalvik bytecode format</span></a></li><li class="devsite-nav-item"><a href="/docs/core/runtime/dex-format"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Dalvik executable format</span></a></li><li class="devsite-nav-item"><a href="/docs/core/runtime/instruction-formats"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Dalvik executable instruction formats</span></a></li><li class="devsite-nav-item"><a href="/docs/core/runtime/constraints"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Constraints</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Configuration</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/docs/core/runtime/configure"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Overview</span></a></li><li class="devsite-nav-item"><a href="/docs/core/runtime/configure/art-service"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ART Service configuration</span></a></li><li class="devsite-nav-item"><a href="/docs/core/runtime/configure/package-manager"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Package manager configuration (deprecated)</span></a></li></ul></div></li><li class="devsite-nav-item"><a href="/docs/core/runtime/art-ti"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ART TI</span></a></li><li class="devsite-nav-item"><a href="/docs/core/runtime/signed-config"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Implement Signed Config</span></a></li><li class="devsite-nav-item"><a href="/docs/core/runtime/gc-debug"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Debug ART garbage collection</span></a></li><li class="devsite-nav-item"><a href="/docs/core/runtime/jit-compiler"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Implement ART JIT compiler</span></a></li><li class="devsite-nav-item"><a href="/docs/core/runtime/rros"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Change the value of an app&#39;s resources at runtime</span></a></li><li class="devsite-nav-item"><a href="/docs/core/runtime/rro-troubleshoot"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Troubleshoot RROs</span></a></li><li class="devsite-nav-item"><a href="/docs/core/runtime/boot-image-profiles"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Boot image profiles</span></a></li><li class="devsite-nav-item"><a href="/docs/core/runtime/soft-restart"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Soft restarts (&lt;= AOSP 14)</span></a></li><li class="devsite-nav-item"><a href="/docs/core/runtime/zygote"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>About the Zygote</span></a></li></ul></div></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable
+           devsite-nav-accordion"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Updates</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/docs/core/ota"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Overview</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>APEX</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/docs/core/ota/apex"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>APEX file format</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/vendor-apex"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Vendor APEX</span></a></li></ul></div></li><li class="devsite-nav-item"><a href="/docs/core/ota/tools"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Build OTA packages</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/sign_builds"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Sign builds for release</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/reduce_size"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Reduce OTA size</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Virtual A/B</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/docs/core/ota/virtual_ab"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Overview</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/virtual_ab/implement"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Implement Virtual A/B</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/virtual_ab/implement-patches"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Implement Virtual A/B - patches</span></a></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Legacy A/B system updates</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/docs/core/ota/ab"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Overview</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/ab/ab_implement"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Implement A/B updates</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/ab/ab_faqs"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Frequently asked questions</span></a></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>(Deprecated) Non-A/B system updates</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/docs/core/ota/nonab"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Overview</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/nonab/block"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Block-based OTA</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/nonab/inside_packages"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Inside OTA packages</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/nonab/device_code"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Device-specific code</span></a></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Dynamic partitions</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/docs/core/ota/dynamic_partitions"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Overview</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/dynamic_partitions/implement"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Implement dynamic partitions</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/dynamic_partitions/ab_launch"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>OTA for A/B devices</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/dynamic_partitions/ab_legacy"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>OTA for legacy A/B devices</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/dynamic_partitions/nonab"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>OTA for non-A/B devices</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/dynamic_partitions/how_to_size_super"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Size the super partition</span></a></li></ul></div></li><li class="devsite-nav-item"><a href="/docs/core/permissions/timezone-rules"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Time zone rules</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/user-data-checkpoint"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>User Data Checkpoint</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/dynamic-system-updates"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Dynamic System Updates</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/resume-on-reboot"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Resume-on-Reboot</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Mainline</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/docs/core/ota/modular-system"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Overview</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/modular-system/adservices"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>AdServices</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/modular-system/adbd"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>adbd</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/modular-system/android-health"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Android Health</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/modular-system/appsearch"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>AppSearch</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/modular-system/art"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ART</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/modular-system/bluetooth"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Bluetooth</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/modular-system/cellbroadcast"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>CellBroadcast</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/modular-system/config-infrastructure"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Config Infrastructure</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/modular-system/conscrypt"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Conscrypt</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/modular-system/crash-recovery"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Crash Recovery</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/modular-system/scheduling"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Device Scheduling</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/modular-system/dns-resolver"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>DNS Resolver</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/modular-system/documentsui"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>DocumentsUI</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/modular-system/extservices"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ExtServices</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/modular-system/ipsec"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>IPsec/IKEv2 Library</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/modular-system/media"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Media</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/modular-system/mediaprovider"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>MediaProvider</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/modular-system/metadata"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ModuleMetadata</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/modular-system/networking"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Network Stack</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/modular-system/nfc-services"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>NFC Services</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/modular-system/nnapi"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>NNAPI Runtime</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/modular-system/ondevicepersonalization"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>OnDevicePersonalization</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/modular-system/permissioncontroller"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>PermissionController</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/modular-system/profiling"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Profiling</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/modular-system/remote-key-provisioning"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Remote Key Provisioning</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/modular-system/sdk-extension"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>SDK Extensions</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/modular-system/statsd"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Statsd</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/modular-system/tethering"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Tethering</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/modular-system/timezone"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Time Zone Data</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/modular-system/uprobestats"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>UprobeStats</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/modular-system/uwb"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>UWB</span></a></li><li class="devsite-nav-item"><a href="/docs/core/ota/modular-system/wifi"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Wi-Fi</span></a></li></ul></div></li></ul></div></li>
+          </ul>
+        
+        
+          
+    
+      
+      <ul class="devsite-nav-list" menu="Docs"
+          aria-label="Side menu" hidden>
+        
+          
+            
+              
+<li class="devsite-nav-item devsite-nav-heading">
+
+  
+  <span
+    
+       class="devsite-nav-title"
+       tooltip
+    
+    >
+  
+    <span class="devsite-nav-text" tooltip >
+      What&#39;s new?
+   </span>
+    
+  
+  </span>
+  
+
+</li>
+
+            
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/whatsnew/release-notes"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Release notes"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Release notes
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/whatsnew/latest-security-bulletins"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Latest security bulletins"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Latest security bulletins
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/whatsnew/latest-cdd"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Latest Compatibility Definition Document (CDD)"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Latest Compatibility Definition Document (CDD)
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/whatsnew/site-updates"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Site updates"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Site updates
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+          
+            
+              
+<li class="devsite-nav-item devsite-nav-heading">
+
+  
+  <span
+    
+       class="devsite-nav-title"
+       tooltip
+    
+    >
+  
+    <span class="devsite-nav-text" tooltip >
+      Getting Started
+   </span>
+    
+  
+  </span>
+  
+
+</li>
+
+            
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/setup/about"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: About"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      About
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/setup/start"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Start"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Start
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/setup/download"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Download"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Download
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/setup/build"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Builds"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Builds
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/setup/test"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Test"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Test
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/setup/create/coding-tasks"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Create"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Create
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/setup/contribute"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Contribute"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Contribute
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/setup/community/cofc"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Community"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Community
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/setup/reference"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Tools, build, and related reference"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Tools, build, and related reference
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+          
+            
+              
+<li class="devsite-nav-item devsite-nav-heading">
+
+  
+  <span
+    
+       class="devsite-nav-title"
+       tooltip
+    
+    >
+  
+    <span class="devsite-nav-text" tooltip >
+      Security
+   </span>
+    
+  
+  </span>
+  
+
+</li>
+
+            
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/security"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Overview"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Overview
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/security/bulletin"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Bulletins"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Bulletins
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/security/features"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Features"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Features
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/security/test/fuzz-sanitize"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Testing"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Testing
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/security/best-practices"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Best Practices"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Best Practices
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+          
+        
+          
+            
+              
+<li class="devsite-nav-item devsite-nav-heading">
+
+  
+  <span
+    
+       class="devsite-nav-title"
+       tooltip
+    
+    >
+  
+    <span class="devsite-nav-text" tooltip >
+      Core Topics
+   </span>
+    
+  
+  </span>
+  
+
+</li>
+
+            
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/core/architecture"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Architecture"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Architecture
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/core/audio"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Audio"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Audio
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/core/camera"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Camera"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Camera
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/core/connect"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Connectivity"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Connectivity
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/core/data"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Data"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Data
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/core/display"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Display"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Display
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/core/fonts/custom-font-fallback"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Fonts"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Fonts
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/core/graphics"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Graphics"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Graphics
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/core/interaction"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Interaction"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Interaction
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/core/media"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Media"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Media
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/core/perf"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Performance"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Performance
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/core/permissions"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Permissions"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Permissions
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/core/power"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Power"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Power
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/core/runtime"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Runtime"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Runtime
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/core/settings"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Settings"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Settings
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/core/storage"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Storage"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Storage
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/core/tests"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Tests"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Tests
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/core/ota"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Updates"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Updates
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/core/virtualization"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Virtualization"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Virtualization
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+          
+        
+          
+            
+              
+<li class="devsite-nav-item devsite-nav-heading">
+
+  
+  <span
+    
+       class="devsite-nav-title"
+       tooltip
+    
+    >
+  
+    <span class="devsite-nav-text" tooltip >
+      Compatibility
+   </span>
+    
+  
+  </span>
+  
+
+</li>
+
+            
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/compatibility/cdd"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Compatibility Definition Document (CDD)"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Compatibility Definition Document (CDD)
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/compatibility/cts"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Compatibility Test Suite (CTS)"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Compatibility Test Suite (CTS)
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+          
+            
+              
+<li class="devsite-nav-item devsite-nav-heading">
+
+  
+  <span
+    
+       class="devsite-nav-title"
+       tooltip
+    
+    >
+  
+    <span class="devsite-nav-text" tooltip >
+      Android Devices
+   </span>
+    
+  
+  </span>
+  
+
+</li>
+
+            
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/devices"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Overview"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Overview
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/devices/cuttlefish"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Cuttlefish"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Cuttlefish
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/devices/admin"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Enterprise"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Enterprise
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/devices/tv"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: TV"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      TV
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+          
+            
+              
+<li class="devsite-nav-item devsite-nav-heading">
+
+  
+  <span
+    
+       class="devsite-nav-title"
+       tooltip
+    
+    >
+  
+    <span class="devsite-nav-text" tooltip >
+      Automotive
+   </span>
+    
+  
+  </span>
+  
+
+</li>
+
+            
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/automotive"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Overview"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Overview
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/automotive/sdv"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Software Defined Vehicle"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Software Defined Vehicle
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/automotive/ivi"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: In-vehicle Infotainment"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      In-vehicle Infotainment
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/docs/automotive/start/releases"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Release Details"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Release Details
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+          
+            
+              
+<li class="devsite-nav-item devsite-nav-heading">
+
+  
+  <span
+    
+       class="devsite-nav-title"
+       tooltip
+    
+    >
+  
+    <span class="devsite-nav-text" tooltip >
+      Reference
+   </span>
+    
+  
+  </span>
+  
+
+</li>
+
+            
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/reference/hidl"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: HIDL"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      HIDL
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/reference/hal"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: HAL"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      HAL
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/reference/tradefed/classes"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Trade Federation"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Trade Federation
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/reference/sts/classes"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Security Test Suite"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Security Test Suite
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+          
+        
+      </ul>
+    
+  
+    
+  
+        
+        
+          
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+        
+      </div>
+    
+  </div>
+</nav>
+          
+        </devsite-book-nav>
+      
+      <section id="gc-wrapper">
+        <main role="main" id="main-content" class="devsite-main-content"
+            
+              has-book-nav
+              has-sidebar
+            >
+          <div class="devsite-sidebar">
+            <div class="devsite-sidebar-content">
+                
+                <devsite-toc class="devsite-nav"
+                            role="navigation"
+                            aria-label="On this page"
+                            depth="2"
+                            scrollbars
+                            data-nosnippet
+                  ></devsite-toc>
+                <devsite-recommendations-sidebar class="nocontent devsite-nav" data-nosnippet>
+                </devsite-recommendations-sidebar>
+            </div>
+          </div>
+          <devsite-content>
+            
+              
+
+
+
+
+
+
+
+
+
+
+<article class="devsite-article">
+  
+  
+  
+    <div class="devsite-banner devsite-banner-announcement nocontent" data-nosnippet
+      
+        
+    background="light-green"
+  
+      >
+      <div class="devsite-banner-message">
+        <div class="devsite-banner-message-text">
+          <p>Effective in 2026, to align with our trunk stable development model and ensure platform stability for the ecosystem, we will publish source code to AOSP in Q2 and Q4. For building and contributing to AOSP, use <code translate="no" dir="ltr">android-latest-release</code>. The <code translate="no" dir="ltr">android-latest-release</code> manifest branch will always reference the most recent release pushed to AOSP. For more information, see <a href="/docs/whatsnew/site-updates#aosp-changes">Changes to AOSP</a>.</p>
+        </div>
+      </div>
+    </div>
+  
+  
+  
+
+  <div class="devsite-article-meta nocontent" role="navigation" data-nosnippet>
+    
+    
+    <ul class="devsite-breadcrumb-list"
+  
+    aria-label="Breadcrumb">
+  
+  <li class="devsite-breadcrumb-item
+             ">
+    
+    
+    
+      
+        
+  <a href="https://source.android.com/"
+      
+        class="devsite-breadcrumb-link gc-analytics-event"
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Breadcrumbs"
+      
+        data-value="1"
+      
+        track-type="globalNav"
+      
+        track-name="breadcrumb"
+      
+        track-metadata-position="1"
+      
+        track-metadata-eventdetail="Android Open Source Project"
+      
+    >
+    
+          AOSP
+        
+  </a>
+  
+      
+    
+  </li>
+  
+  <li class="devsite-breadcrumb-item
+             ">
+    
+      
+      <div class="devsite-breadcrumb-guillemet material-icons" aria-hidden="true"></div>
+    
+    
+    
+      
+        
+  <a href="https://source.android.com/docs"
+      
+        class="devsite-breadcrumb-link gc-analytics-event"
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Breadcrumbs"
+      
+        data-value="2"
+      
+        track-type="globalNav"
+      
+        track-name="breadcrumb"
+      
+        track-metadata-position="2"
+      
+        track-metadata-eventdetail="Documentation"
+      
+    >
+    
+          Docs
+        
+  </a>
+  
+      
+    
+  </li>
+  
+  <li class="devsite-breadcrumb-item
+             ">
+    
+      
+      <div class="devsite-breadcrumb-guillemet material-icons" aria-hidden="true"></div>
+    
+    
+    
+      
+        
+  <a href="https://source.android.com/docs/core"
+      
+        class="devsite-breadcrumb-link gc-analytics-event"
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Breadcrumbs"
+      
+        data-value="3"
+      
+        track-type="globalNav"
+      
+        track-name="breadcrumb"
+      
+        track-metadata-position="3"
+      
+        track-metadata-eventdetail="Android OS core topics"
+      
+    >
+    
+          Core topics
+        
+  </a>
+  
+      
+    
+  </li>
+  
+  <li class="devsite-breadcrumb-item
+             ">
+    
+      
+      <div class="devsite-breadcrumb-guillemet material-icons" aria-hidden="true"></div>
+    
+    
+    
+      
+        
+  <a href="https://source.android.com/docs/core/perf"
+      
+        class="devsite-breadcrumb-link gc-analytics-event"
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Breadcrumbs"
+      
+        data-value="4"
+      
+        track-type="globalNav"
+      
+        track-name="breadcrumb"
+      
+        track-metadata-position="4"
+      
+        track-metadata-eventdetail=""
+      
+    >
+    
+          System health and Updates
+        
+  </a>
+  
+      
+    
+  </li>
+  
+</ul>
+    
+      
+    <devsite-thumb-rating position="header">
+    </devsite-thumb-rating>
+  
+    
+  </div>
+  
+    <h1 class="devsite-page-title" tabindex="-1">
+      Dalvik executable instruction formats<devsite-actions hidden data-nosnippet><devsite-feature-tooltip
+      ack-key="AckCollectionsBookmarkTooltipDismiss"
+      analytics-category="Site-Wide Custom Events"
+      analytics-action-show="Callout Profile displayed"
+      analytics-action-close="Callout Profile dismissed"
+      analytics-label="Create Collection Callout"
+      class="devsite-page-bookmark-tooltip nocontent"
+      data-nosnippet
+      dismiss-button="true"
+      id="devsite-collections-dropdown"
+      
+      dismiss-button-text="Dismiss"
+
+      
+      close-button-text="Got it">
+
+    
+    
+      <devsite-bookmark></devsite-bookmark>
+    
+
+    <span slot="popout-heading">
+      
+      Stay organized with collections
+    </span>
+    <span slot="popout-contents">
+      
+      Save and categorize content based on your preferences.
+    </span>
+  </devsite-feature-tooltip></devsite-actions>
+  
+      
+    </h1>
+  <div class="devsite-page-title-meta"><devsite-view-release-notes></devsite-view-release-notes></div>
+  
+
+  <devsite-toc class="devsite-nav"
+    depth="2"
+    devsite-toc-embedded
+    >
+  </devsite-toc>
+  
+    
+  <div class="devsite-article-body clearfix
+  ">
+
+  
+    
+    
+  <!--
+      Copyright 2018 The Android Open Source Project
+
+      Licensed under the Apache License, Version 2.0 (the "License");
+      you may not use this file except in compliance with the License.
+      You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+      Unless required by applicable law or agreed to in writing, software
+      distributed under the License is distributed on an "AS IS" BASIS,
+      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+      See the License for the specific language governing permissions and
+      limitations under the License.
+  -->
+
+
+
+<p>This page lists the instruction formats used by the Dalvik executable (DEX)
+format and Dalvik bytecode. It is meant to be used in conjunction with the
+<a href="/docs/core/runtime/dalvik-bytecode">bytecode reference document</a>.</p>
+
+<h2 id="bitwise" data-text="Bitwise descriptions" tabindex="-1">Bitwise descriptions</h2>
+
+<p>The first column in the format table lists the bitwise layout of
+the format. It consists of one or more space-separated "words" each of
+which describes a 16-bit code unit. Each character in a word
+represents four bits, read from high bits to low, with vertical bars
+("<code translate="no" dir="ltr">|</code>") interspersed to aid in reading. Uppercase letters
+in sequence from "<code translate="no" dir="ltr">A</code>" are used to indicate fields within
+the format (which then get defined further by the syntax column). The term
+"<code translate="no" dir="ltr">op</code>" is used to indicate the position of an eight-bit
+opcode within the format. A slashed zero
+("<code translate="no" dir="ltr">&Oslash;</code>") is used to indicate that all bits must be
+zero in the indicated position.</p>
+
+<p>For the most part, lettering proceeds from earlier code units to
+later code units, and low-order to high-order within a code unit.
+However, there are a few exceptions to this general rule, which are
+done in order to make the naming of similar-meaning parts be the same
+across different instruction formats. These cases are noted explicitly
+in the format descriptions.</p>
+
+<p>For example, the format "<code translate="no" dir="ltr">B|A|<i>op</i> CCCC</code>" indicates
+that the format consists of two 16-bit code units. The first word
+consists of the opcode in the low eight bits and a pair of four-bit
+values in the high eight bits; and the second word consists of a single
+16-bit value.</p>
+
+<h2 id="format-ids" data-text="Format IDs" tabindex="-1">Format IDs</h2>
+
+<p>The second column in the format table indicates the short identifier
+for the format, which is used in other documents and in code to identify
+the format.</p>
+
+<p>Most format IDs consist of three characters, two digits followed by a
+letter. The first digit indicates the number of 16-bit code units in the
+format. The second digit indicates the maximum number of registers that the
+format contains (maximum, since some formats can accommodate a variable
+number of registers), with the special designation "<code translate="no" dir="ltr">r</code>" indicating
+that a range of registers is encoded. The final letter semi-mnemonically
+indicates the type of any extra data encoded by the format. For example,
+format "<code translate="no" dir="ltr">21t</code>" is of length two, contains one register reference,
+and additionally contains a branch target.</p>
+
+<p>Suggested static linking formats have an additional
+"<code translate="no" dir="ltr">s</code>" suffix, making them four characters total. Similarly,
+suggested "inline" linking formats have an additional "<code translate="no" dir="ltr">i</code>"
+suffix. (In this context, inline linking is like static linking,
+except with more direct ties into a machine's implementation.)
+Finally, a couple oddball suggested formats (e.g.,
+"<code translate="no" dir="ltr">20bc</code>") include two pieces of data which are both
+represented in its format ID.</p>
+
+<p>The full list of typecode letters are as follows. Note that some
+forms have different sizes, depending on the format:</p>
+
+<table class="letters">
+<thead>
+<tr>
+  <th>Mnemonic</th>
+  <th>Bit Sizes</th>
+  <th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>b</td>
+  <td>8</td>
+  <td>immediate signed <b>b</b>yte</td>
+</tr>
+<tr>
+  <td>c</td>
+  <td>16, 32</td>
+  <td><b>c</b>onstant pool index</td>
+</tr>
+<tr>
+  <td>f</td>
+  <td>16</td>
+  <td>inter<b>f</b>ace constants (only used in statically linked formats)
+  </td>
+</tr>
+<tr>
+  <td>h</td>
+  <td>16</td>
+  <td>immediate signed <b>h</b>at (high-order bits of a 32- or 64-bit
+    value; low-order bits are all <code translate="no" dir="ltr">0</code>)
+  </td>
+</tr>
+<tr>
+  <td>i</td>
+  <td>32</td>
+  <td>immediate signed <b>i</b>nt, or 32-bit float</td>
+</tr>
+<tr>
+  <td>l</td>
+  <td>64</td>
+  <td>immediate signed <b>l</b>ong, or 64-bit double</td>
+</tr>
+<tr>
+  <td>m</td>
+  <td>16</td>
+  <td><b>m</b>ethod constants (only used in statically linked formats)</td>
+</tr>
+<tr>
+  <td>n</td>
+  <td>4</td>
+  <td>immediate signed <b>n</b>ibble</td>
+</tr>
+<tr>
+  <td>s</td>
+  <td>16</td>
+  <td>immediate signed <b>s</b>hort</td>
+</tr>
+<tr>
+  <td>t</td>
+  <td>8, 16, 32</td>
+  <td>branch <b>t</b>arget</td>
+</tr>
+<tr>
+  <td>x</td>
+  <td>0</td>
+  <td>no additional data</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="syntax" data-text="Syntax" tabindex="-1">Syntax</h2>
+
+<p>The third column of the format table indicates the human-oriented
+syntax for instructions which use the indicated format. Each instruction
+starts with the named opcode and is optionally followed by one or
+more arguments, themselves separated with commas.</p>
+
+<p>Wherever an argument refers to a field from the first column, the
+letter for that field is indicated in the syntax, repeated once for
+each four bits of the field. For example, an eight-bit field labeled
+"<code translate="no" dir="ltr">BB</code>" in the first column would also be labeled
+"<code translate="no" dir="ltr">BB</code>" in the syntax column.</p>
+
+<p>Arguments which name a register have the form "<code translate="no" dir="ltr">v<i>X</i></code>".
+The prefix "<code translate="no" dir="ltr">v</code>" was chosen instead of the more common
+"<code translate="no" dir="ltr">r</code>" exactly to avoid conflicting with (non-virtual) architectures
+on which the Dalvik Executable format might be implemented which themselves
+use the prefix "<code translate="no" dir="ltr">r</code>" for their registers. (That is, this
+decision makes it possible to talk about both virtual and real registers
+together without the need for circumlocution.)</p>
+
+<p>Arguments which indicate a literal value have the form
+"<code translate="no" dir="ltr">#+<i>X</i></code>". Some formats indicate literals that only
+have non-zero bits in their high-order bits; for these, the zeroes
+are represented explicitly in the syntax, even though they do not
+appear in the bitwise representation.</p>
+
+<p>Arguments which indicate a relative instruction address offset have the
+form "<code translate="no" dir="ltr">+<i>X</i></code>".</p>
+
+<p>Arguments which indicate a literal constant pool index have the form
+"<code translate="no" dir="ltr"><i>kind</i>@<i>X</i></code>", where "<code translate="no" dir="ltr"><i>kind</i></code>"
+indicates which constant pool is being referred to. Each opcode that
+uses such a format explicitly allows only one kind of constant; see
+the opcode reference to figure out the correspondence. The
+kinds of constant pool are "<code translate="no" dir="ltr">string</code>" (string pool index),
+"<code translate="no" dir="ltr">type</code>" (type pool index), "<code translate="no" dir="ltr">field</code>" (field
+pool index), "<code translate="no" dir="ltr">meth</code>" (method pool index), and
+"<code translate="no" dir="ltr">site</code>" (call site index).</p>
+
+<p>Similar to the representation of constant pool indices, there are
+also suggested (optional) forms that indicate prelinked offsets or
+indices. There are two types of suggested prelinked value: vtable offsets
+(indicated as "<code translate="no" dir="ltr">vtaboff</code>") and field offsets (indicated as
+"<code translate="no" dir="ltr">fieldoff</code>").</p>
+
+<p>In the cases where a format value isn't explicitly part of the syntax
+but instead picks a variant, each variant is listed with the prefix
+"<code translate="no" dir="ltr">[<i>X</i>=<i>N</i>]</code>" (e.g., "<code translate="no" dir="ltr">[A=2]</code>") to indicate
+the correspondence.</p>
+
+<h2 id="formats" data-text="Formats" tabindex="-1">Formats</h2>
+
+<table class="format">
+<thead>
+<tr>
+  <th>Format</th>
+  <th>ID</th>
+  <th>Syntax</th>
+  <th>Notable Opcodes Covered</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><i>N/A</i></td>
+  <td>00x</td>
+  <td><i><code translate="no" dir="ltr">N/A</code></i></td>
+  <td><i>pseudo-format used for unused opcodes; suggested for use as the
+    nominal format for a breakpoint opcode</i></td>
+</tr>
+<tr>
+  <td>&Oslash;&Oslash;|<i>op</i></td>
+  <td>10x</td>
+  <td><i><code translate="no" dir="ltr">op</code></i></td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td rowspan="2">B|A|<i>op</i></td>
+  <td>12x</td>
+  <td><i><code translate="no" dir="ltr">op</code></i> vA, vB</td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td>11n</td>
+  <td><i><code translate="no" dir="ltr">op</code></i> vA, #+B</td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td rowspan="2">AA|<i>op</i></td>
+  <td>11x</td>
+  <td><i><code translate="no" dir="ltr">op</code></i> vAA</td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td>10t</td>
+  <td><i><code translate="no" dir="ltr">op</code></i> +AA</td>
+  <td>goto</td>
+</tr>
+<tr>
+  <td>&Oslash;&Oslash;|<i>op</i> AAAA</td>
+  <td>20t</td>
+  <td><i><code translate="no" dir="ltr">op</code></i> +AAAA</td>
+  <td>goto/16</td>
+</tr>
+<tr>
+  <td>AA|<i>op</i> BBBB</td>
+  <td>20bc</td>
+  <td><i><code translate="no" dir="ltr">op</code></i> AA, kind@BBBB</td>
+  <td><i>suggested format for statically determined verification errors;
+    A is the type of error and B is an index into a type-appropriate
+    table (e.g. method references for a no-such-method error)</i></td>
+</tr>
+<tr>
+  <td rowspan="5">AA|<i>op</i> BBBB</td>
+  <td>22x</td>
+  <td><i><code translate="no" dir="ltr">op</code></i> vAA, vBBBB</td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td>21t</td>
+  <td><i><code translate="no" dir="ltr">op</code></i> vAA, +BBBB</td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td>21s</td>
+  <td><i><code translate="no" dir="ltr">op</code></i> vAA, #+BBBB</td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td>21h</td>
+  <td><i><code translate="no" dir="ltr">op</code></i> vAA, #+BBBB0000<br/>
+    <i><code translate="no" dir="ltr">op</code></i> vAA, #+BBBB000000000000
+  </td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td>21c</td>
+  <td><i><code translate="no" dir="ltr">op</code></i> vAA, type@BBBB<br/>
+    <i><code translate="no" dir="ltr">op</code></i> vAA, field@BBBB<br/>
+    <i><code translate="no" dir="ltr">op</code></i> vAA, method_handle@BBBB<br/>
+    <i><code translate="no" dir="ltr">op</code></i> vAA, proto@BBBB<br/>
+    <i><code translate="no" dir="ltr">op</code></i> vAA, string@BBBB
+  </td>
+  <td>check-cast<br/>
+    const-class<br/>
+    const-method-handle<br/>
+    const-method-type<br/>
+    const-string
+  </td>
+</tr>
+<tr>
+  <td rowspan="2">AA|<i>op</i> CC|BB</td>
+  <td>23x</td>
+  <td><i><code translate="no" dir="ltr">op</code></i> vAA, vBB, vCC</td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td>22b</td>
+  <td><i><code translate="no" dir="ltr">op</code></i> vAA, vBB, #+CC</td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td rowspan="4">B|A|<i>op</i> CCCC</td>
+  <td>22t</td>
+  <td><i><code translate="no" dir="ltr">op</code></i> vA, vB, +CCCC</td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td>22s</td>
+  <td><i><code translate="no" dir="ltr">op</code></i> vA, vB, #+CCCC</td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td>22c</td>
+  <td><i><code translate="no" dir="ltr">op</code></i> vA, vB, type@CCCC<br/>
+    <i><code translate="no" dir="ltr">op</code></i> vA, vB, field@CCCC
+  </td>
+  <td>instance-of</td>
+</tr>
+<tr>
+  <td>22cs</td>
+  <td><i><code translate="no" dir="ltr">op</code></i> vA, vB, fieldoff@CCCC</td>
+  <td><i>suggested format for statically linked field access instructions of
+    format 22c</i>
+  </td>
+</tr>
+<tr>
+  <td>&Oslash;&Oslash;|<i>op</i> AAAA<sub>lo</sub> AAAA<sub>hi</sub></td>
+  <td>30t</td>
+  <td><i><code translate="no" dir="ltr">op</code></i> +AAAAAAAA</td>
+  <td>goto/32</td>
+</tr>
+<tr>
+  <td>&Oslash;&Oslash;|<i>op</i> AAAA BBBB</td>
+  <td>32x</td>
+  <td><i><code translate="no" dir="ltr">op</code></i> vAAAA, vBBBB</td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td rowspan="3">AA|<i>op</i> BBBB<sub>lo</sub> BBBB<sub>hi</sub></td>
+  <td>31i</td>
+  <td><i><code translate="no" dir="ltr">op</code></i> vAA, #+BBBBBBBB</td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td>31t</td>
+  <td><i><code translate="no" dir="ltr">op</code></i> vAA, +BBBBBBBB</td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td>31c</td>
+  <td><i><code translate="no" dir="ltr">op</code></i> vAA, string@BBBBBBBB</td>
+  <td>const-string/jumbo</td>
+</tr>
+<tr>
+  <td rowspan="3">A|G|<i>op</i> BBBB F|E|D|C</td>
+  <td>35c</td>
+  <td><i>[<code translate="no" dir="ltr">A=5</code>] <code translate="no" dir="ltr">op</code></i> {vC, vD, vE, vF, vG},
+    meth@BBBB<br/>
+    <i>[<code translate="no" dir="ltr">A=5</code>] <code translate="no" dir="ltr">op</code></i> {vC, vD, vE, vF, vG},
+    site@BBBB<br/>
+    <i>[<code translate="no" dir="ltr">A=5</code>] <code translate="no" dir="ltr">op</code></i> {vC, vD, vE, vF, vG},
+    type@BBBB<br/>
+    <i>[<code translate="no" dir="ltr">A=4</code>] <code translate="no" dir="ltr">op</code></i> {vC, vD, vE, vF},
+    <i><code translate="no" dir="ltr">kind</code></i>@BBBB<br/>
+    <i>[<code translate="no" dir="ltr">A=3</code>] <code translate="no" dir="ltr">op</code></i> {vC, vD, vE},
+    <i><code translate="no" dir="ltr">kind</code></i>@BBBB<br/>
+    <i>[<code translate="no" dir="ltr">A=2</code>] <code translate="no" dir="ltr">op</code></i> {vC, vD},
+    <i><code translate="no" dir="ltr">kind</code></i>@BBBB<br/>
+    <i>[<code translate="no" dir="ltr">A=1</code>] <code translate="no" dir="ltr">op</code></i> {vC},
+    <i><code translate="no" dir="ltr">kind</code></i>@BBBB<br/>
+    <i>[<code translate="no" dir="ltr">A=0</code>] <code translate="no" dir="ltr">op</code></i> {},
+    <i><code translate="no" dir="ltr">kind</code></i>@BBBB<br/>
+    <p><i>The unusual choice in lettering here reflects a desire to make
+    the count and the reference index have the same label as in format
+    3rc.</i></p>
+  </td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td>35ms</td>
+  <td><i>[<code translate="no" dir="ltr">A=5</code>] <code translate="no" dir="ltr">op</code></i> {vC, vD, vE, vF, vG},
+    vtaboff@BBBB<br/>
+    <i>[<code translate="no" dir="ltr">A=4</code>] <code translate="no" dir="ltr">op</code></i> {vC, vD, vE, vF},
+    vtaboff@BBBB<br/>
+    <i>[<code translate="no" dir="ltr">A=3</code>] <code translate="no" dir="ltr">op</code></i> {vC, vD, vE},
+    vtaboff@BBBB<br/>
+    <i>[<code translate="no" dir="ltr">A=2</code>] <code translate="no" dir="ltr">op</code></i> {vC, vD},
+    vtaboff@BBBB<br/>
+    <i>[<code translate="no" dir="ltr">A=1</code>] <code translate="no" dir="ltr">op</code></i> {vC},
+    vtaboff@BBBB<br/>
+    <p><i>The unusual choice in lettering here reflects a desire to make
+    the count and the reference index have the same label as in format
+    3rms.</i></p>
+  </td>
+  <td><i>suggested format for statically linked <code translate="no" dir="ltr">invoke-virtual</code>
+    and <code translate="no" dir="ltr">invoke-super</code> instructions of format 35c</i>
+  </td>
+</tr>
+<tr>
+  <td>35mi</td>
+  <td><i>[<code translate="no" dir="ltr">A=5</code>] <code translate="no" dir="ltr">op</code></i> {vC, vD, vE, vF, vG},
+    inline@BBBB<br/>
+    <i>[<code translate="no" dir="ltr">A=4</code>] <code translate="no" dir="ltr">op</code></i> {vC, vD, vE, vF},
+    inline@BBBB<br/>
+    <i>[<code translate="no" dir="ltr">A=3</code>] <code translate="no" dir="ltr">op</code></i> {vC, vD, vE},
+    inline@BBBB<br/>
+    <i>[<code translate="no" dir="ltr">A=2</code>] <code translate="no" dir="ltr">op</code></i> {vC, vD},
+    inline@BBBB<br/>
+    <i>[<code translate="no" dir="ltr">A=1</code>] <code translate="no" dir="ltr">op</code></i> {vC},
+    inline@BBBB<br/>
+    <p><i>The unusual choice in lettering here reflects a desire to make
+    the count and the reference index have the same label as in format
+    3rmi.</i></p>
+  </td>
+  <td><i>suggested format for inline linked <code translate="no" dir="ltr">invoke-static</code>
+    and <code translate="no" dir="ltr">invoke-virtual</code> instructions of format 35c</i>
+  </td>
+</tr>
+<tr>
+  <td rowspan="3">AA|<i>op</i> BBBB CCCC</td>
+  <td>3rc</td>
+  <td><i><code translate="no" dir="ltr">op</code></i> {vCCCC .. vNNNN}, meth@BBBB<br/>
+    <i><code translate="no" dir="ltr">op</code></i> {vCCCC .. vNNNN}, site@BBBB<br/>
+    <i><code translate="no" dir="ltr">op</code></i> {vCCCC .. vNNNN}, type@BBBB<br/>
+    <p><i>where <code translate="no" dir="ltr">NNNN = CCCC+AA-1</code>, that is <code translate="no" dir="ltr">A</code>
+    determines the count <code translate="no" dir="ltr">0..255</code>, and <code translate="no" dir="ltr">C</code>
+    determines the first register</i></p>
+  </td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td>3rms</td>
+  <td><i><code translate="no" dir="ltr">op</code></i> {vCCCC .. vNNNN}, vtaboff@BBBB<br/>
+    <p><i>where <code translate="no" dir="ltr">NNNN = CCCC+AA-1</code>, that is <code translate="no" dir="ltr">A</code>
+    determines the count <code translate="no" dir="ltr">0..255</code>, and <code translate="no" dir="ltr">C</code>
+    determines the first register</i></p>
+  </td>
+  <td><i>suggested format for statically linked <code translate="no" dir="ltr">invoke-virtual</code>
+    and <code translate="no" dir="ltr">invoke-super</code> instructions of format <code translate="no" dir="ltr">3rc</code></i>
+  </td>
+</tr>
+<tr>
+  <td>3rmi</td>
+  <td><i><code translate="no" dir="ltr">op</code></i> {vCCCC .. vNNNN}, inline@BBBB<br/>
+    <p><i>where <code translate="no" dir="ltr">NNNN = CCCC+AA-1</code>, that is <code translate="no" dir="ltr">A</code>
+    determines the count <code translate="no" dir="ltr">0..255</code>, and <code translate="no" dir="ltr">C</code>
+    determines the first register</i></p>
+  </td>
+  <td><i>suggested format for inline linked <code translate="no" dir="ltr">invoke-static</code>
+    and <code translate="no" dir="ltr">invoke-virtual</code> instructions of format 3rc</i>
+  </td>
+</tr>
+<tr>
+  <td>A|G|<i>op</i> BBBB F|E|D|C HHHH
+  <td>45cc</td>
+  <td>
+    <i>[<code translate="no" dir="ltr">A=5</code>] <code translate="no" dir="ltr">op</code></i> {vC, vD, vE, vF, vG}, meth@BBBB, proto@HHHH<br>
+    <i>[<code translate="no" dir="ltr">A=4</code>] <code translate="no" dir="ltr">op</code></i> {vC, vD, vE, vF}, meth@BBBB, proto@HHHH<br>
+    <i>[<code translate="no" dir="ltr">A=3</code>] <code translate="no" dir="ltr">op</code></i> {vC, vD, vE}, meth@BBBB, proto@HHHH<br>
+    <i>[<code translate="no" dir="ltr">A=2</code>] <code translate="no" dir="ltr">op</code></i> {vC, vD}, meth@BBBB, proto@HHHH<br>
+    <i>[<code translate="no" dir="ltr">A=1</code>] <code translate="no" dir="ltr">op</code></i> {vC}, meth@BBBB, proto@HHHH
+  </td>
+  <td>invoke-polymorphic
+  </td>
+</tr>
+<tr>
+  <td>AA|<i>op</i> BBBB CCCC HHHH
+  <td>4rcc</td>
+  <td>
+    <code translate="no" dir="ltr">op></code> {vCCCC .. vNNNN}, meth@BBBB, proto@HHHH
+    <p><i>where <code translate="no" dir="ltr">NNNN = CCCC+AA-1</code>, that is <code translate="no" dir="ltr">A</code>
+    determines the count <code translate="no" dir="ltr">0..255</code>, and <code translate="no" dir="ltr">C</code>
+    determines the first register</i></p>
+  </td>
+  <td>invoke-polymorphic/range
+  </td>
+</tr>
+<tr>
+  <td>AA|<i>op</i> BBBB<sub>lo</sub> BBBB BBBB BBBB<sub>hi</sub></td>
+  <td>51l</td>
+  <td><i><code translate="no" dir="ltr">op</code></i> vAA, #+BBBBBBBBBBBBBBBB</td>
+  <td>const-wide</td>
+</tr>
+</tbody>
+</table>
+
+  
+  
+
+  
+</div>
+
+  
+    
+    
+      
+    <devsite-thumb-rating position="footer">
+    </devsite-thumb-rating>
+  
+       
+    
+    
+  
+
+  <div class="devsite-floating-action-buttons"></div></article>
+
+
+<devsite-content-footer class="nocontent" data-nosnippet>
+  <p>Content and code samples on this page are subject to the licenses described in the <a href="/license">Content License</a>. Java and OpenJDK are trademarks or registered trademarks of Oracle and/or its affiliates.</p>
+  <p>Last updated 2026-10-09 UTC.</p>
+</devsite-content-footer>
+
+
+<devsite-notification
+>
+</devsite-notification>
+
+
+  
+<div class="devsite-content-data">
+  
+  
+    <template class="devsite-content-data-template">
+      [[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-10-09 UTC."],[],[]]
+    </template>
+  
+</div>
+            
+          </devsite-content>
+        </main>
+        <devsite-footer-promos class="devsite-footer">
+          
+            
+          
+        </devsite-footer-promos>
+        <devsite-footer-linkboxes class="devsite-footer">
+          
+            
+<nav class="devsite-footer-linkboxes nocontent"
+     aria-label="Footer links"
+     data-nosnippet>
+  
+  <ul class="devsite-footer-linkboxes-list">
+    
+    <li class="devsite-footer-linkbox ">
+    <h3 class="devsite-footer-linkbox-heading no-link">Build</h3>
+      <ul class="devsite-footer-linkbox-list">
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="//android.googlesource.com"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 1)"
+            >
+            
+          
+            Android repository
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="/source/requirements"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 2)"
+            >
+            
+          
+            Requirements
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="/source/downloading"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 3)"
+            >
+            
+          
+            Downloading
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="//developers.google.com/android/blobs-preview/"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 4)"
+            >
+            
+          
+            Preview binaries
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="//developers.google.com/android/images/"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 5)"
+            >
+            
+          
+            Factory images
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="//developers.google.com/android/drivers/"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 6)"
+            >
+            
+              
+              
+            
+          
+            Driver binaries
+          
+          </a>
+          
+          
+        </li>
+        
+      </ul>
+    </li>
+    
+    <li class="devsite-footer-linkbox ">
+    <h3 class="devsite-footer-linkbox-heading no-link">Connect</h3>
+      <ul class="devsite-footer-linkbox-list">
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="//x.com/Android/"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 1)"
+            >
+            
+          
+            @Android on X
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="//x.com/AndroidDev/"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 2)"
+            >
+            
+          
+            @AndroidDev on X
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="//blog.google/products/android/"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 3)"
+            >
+            
+          
+            Android Blog
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="//security.googleblog.com"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 4)"
+            >
+            
+          
+            Google Security Blog
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="//groups.google.com/forum/?fromgroups#!forum/android-platform/"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 5)"
+            >
+            
+          
+            Platform on Google Groups
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="//groups.google.com/forum/?fromgroups#!forum/android-building/"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 6)"
+            >
+            
+          
+            Building on Google Groups
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="//groups.google.com/forum/?fromgroups#!forum/android-porting/"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 7)"
+            >
+            
+              
+              
+            
+          
+            Porting on Google Groups
+          
+          </a>
+          
+          
+        </li>
+        
+      </ul>
+    </li>
+    
+    <li class="devsite-footer-linkbox ">
+    <h3 class="devsite-footer-linkbox-heading no-link">Get help</h3>
+      <ul class="devsite-footer-linkbox-list">
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="//support.google.com/android/"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 1)"
+            >
+            
+          
+            Android Help Center
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="//support.google.com/pixelphone/"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 2)"
+            >
+            
+          
+            Pixel Help Center
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="//www.android.com"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 3)"
+            >
+            
+          
+            www.android.com
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="//www.android.com/gms/"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 4)"
+            >
+            
+          
+            Google Mobile Services
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="//stackoverflow.com/questions/tagged/android-source/"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 5)"
+            >
+            
+          
+            Stack Overflow
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="//issuetracker.google.com/issues?q=status:open%20componentid:190923"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 6)"
+            >
+            
+              
+              
+            
+          
+            Issue Tracker
+          
+          </a>
+          
+          
+        </li>
+        
+      </ul>
+    </li>
+    
+  </ul>
+  
+</nav>
+          
+        </devsite-footer-linkboxes>
+        <devsite-footer-utility class="devsite-footer">
+          
+            
+
+<div class="devsite-footer-utility nocontent" data-nosnippet>
+  
+
+  
+  <nav class="devsite-footer-utility-links" aria-label="Utility links">
+    
+    <ul class="devsite-footer-utility-list">
+      
+      <li class="devsite-footer-utility-item
+                 ">
+        
+        
+        <a class="devsite-footer-utility-link gc-analytics-event"
+           href="/source/"
+           data-category="Site-Wide Custom Events"
+           data-label="Footer About Android link"
+         >
+          About Android
+        </a>
+        
+      </li>
+      
+      <li class="devsite-footer-utility-item
+                 ">
+        
+        
+        <a class="devsite-footer-utility-link gc-analytics-event"
+           href="/source/community"
+           data-category="Site-Wide Custom Events"
+           data-label="Footer Community link"
+         >
+          Community
+        </a>
+        
+      </li>
+      
+      <li class="devsite-footer-utility-item
+                 ">
+        
+        
+        <a class="devsite-footer-utility-link gc-analytics-event"
+           href="/legal"
+           data-category="Site-Wide Custom Events"
+           data-label="Footer Legal link"
+         >
+          Legal
+        </a>
+        
+      </li>
+      
+      <li class="devsite-footer-utility-item
+                 ">
+        
+        
+        <a class="devsite-footer-utility-link gc-analytics-event"
+           href="/license"
+           data-category="Site-Wide Custom Events"
+           data-label="Footer License link"
+         >
+          License
+        </a>
+        
+      </li>
+      
+      <li class="devsite-footer-utility-item
+                 ">
+        
+        
+        <a class="devsite-footer-utility-link gc-analytics-event"
+           href="//policies.google.com/privacy"
+           data-category="Site-Wide Custom Events"
+           data-label="Footer Privacy link"
+         >
+          Privacy
+        </a>
+        
+      </li>
+      
+      <li class="devsite-footer-utility-item
+                 ">
+        
+        
+        <a class="devsite-footer-utility-link gc-analytics-event"
+           href="//issuetracker.google.com/issues/new?component=191476"
+           data-category="Site-Wide Custom Events"
+           data-label="Footer Site feedback link"
+         >
+          Site feedback
+        </a>
+        
+      </li>
+      
+      <li class="devsite-footer-utility-item
+                 glue-cookie-notification-bar-control">
+        
+        
+        <a class="devsite-footer-utility-link gc-analytics-event"
+           href="#"
+           data-category="Site-Wide Custom Events"
+           data-label="Footer Manage cookies link"
+         
+           aria-hidden="true"
+         >
+          Manage cookies
+        </a>
+        
+      </li>
+      
+    </ul>
+    
+    
+<devsite-language-selector>
+  <ul role="presentation">
+    
+    
+    <li role="presentation">
+      <a role="menuitem" lang="en"
+        >English</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="de"
+        >Deutsch</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="es_419"
+        >Español – América Latina</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="fr"
+        >Français</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="id"
+        >Indonesia</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="it"
+        >Italiano</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="pl"
+        >Polski</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="pt_br"
+        >Português – Brasil</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="vi"
+        >Tiếng Việt</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="tr"
+        >Türkçe</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ru"
+        >Русский</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="he"
+        >עברית</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ar"
+        >العربيّة</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="fa"
+        >فارسی</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="hi"
+        >हिंदी</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="bn"
+        >বাংলা</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="th"
+        >ภาษาไทย</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="zh_cn"
+        >中文 – 简体</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="zh_tw"
+        >中文 – 繁體</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ja"
+        >日本語</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ko"
+        >한국어</a>
+    </li>
+    
+  </ul>
+</devsite-language-selector>
+
+  </nav>
+</div>
+          
+        </devsite-footer-utility>
+        <devsite-panel>
+          
+        </devsite-panel>
+        
+      </section>
+      </section>
+    <devsite-sitemask></devsite-sitemask>
+    <devsite-snackbar></devsite-snackbar>
+    <devsite-tooltip ></devsite-tooltip>
+    <devsite-heading-link></devsite-heading-link>
+    <devsite-analytics>
+      
+        <script type="application/json" analytics>[]</script>
+<script type="application/json" tag-management>{&#34;at&#34;: &#34;True&#34;, &#34;ga4&#34;: [{&#34;id&#34;: &#34;G-2TQ26MFY2E&#34;, &#34;purpose&#34;: 0}], &#34;ga4p&#34;: [{&#34;id&#34;: &#34;G-2TQ26MFY2E&#34;, &#34;purpose&#34;: 0}], &#34;gtm&#34;: [], &#34;parameters&#34;: {&#34;internalUser&#34;: &#34;False&#34;, &#34;language&#34;: {&#34;machineTranslated&#34;: &#34;False&#34;, &#34;requested&#34;: &#34;en&#34;, &#34;served&#34;: &#34;en&#34;}, &#34;pageType&#34;: &#34;article&#34;, &#34;projectName&#34;: &#34;Android OS core topics&#34;, &#34;signedIn&#34;: &#34;False&#34;, &#34;tenant&#34;: &#34;androidsource&#34;, &#34;recommendations&#34;: {&#34;sourcePage&#34;: &#34;&#34;, &#34;sourceType&#34;: 0, &#34;sourceRank&#34;: 0, &#34;sourceIdenticalDescriptions&#34;: 0, &#34;sourceTitleWords&#34;: 0, &#34;sourceDescriptionWords&#34;: 0, &#34;experiment&#34;: &#34;&#34;}, &#34;experiment&#34;: {&#34;ids&#34;: &#34;&#34;}}}</script>
+      
+    </devsite-analytics>
+    
+      <devsite-badger></devsite-badger>
+    
+    
+    
+    
+<android-fully-clickable
+    target="
+        .android-case-study .devsite-landing-row-item,
+        .android-grouped-resources .devsite-landing-row-item,
+        .android-grouped-resources-contained--primary .devsite-landing-row-item,
+        .android-grouped-resources-contained--secondary .devsite-landing-row-item,
+        .android-grouped-resources-contained--tertiary .devsite-landing-row-item,
+        .android-grouped-resources-primary .devsite-landing-row-item,
+        .android-grouped-resources-secondary .devsite-landing-row-item,
+        .android-grouped-resources-uncontained--primary .devsite-landing-row-item,
+        .android-grouped-resources-uncontained--secondary .devsite-landing-row-item,
+        .android-grouped-resources-uncontained--tertiary .devsite-landing-row-item,
+        .android-guide-cards .devsite-landing-row-item,
+        .android-illustrated-resources-index .devsite-landing-row-item,
+        .android-illustrated-resources-primary .devsite-landing-row-item,
+        .android-illustrated-resources-secondary .devsite-landing-row-item,
+        .android-illustrated-resources-secondary-small .devsite-landing-row-item,
+        .android-illustrated-resources-tertiary .devsite-landing-row-item,
+        .android-illustrated-resources-tertiary-small .devsite-landing-row-item,
+        .android-promo .devsite-landing-row-item,
+        .android-quick-link,
+        .android-samples .devsite-card-wrapper,
+        .fully-clickable"
+    watch=".android-samples, devsite-content"></android-fully-clickable>
+    
+<script nonce="wdRllCgY0/so73s765dQhM2wGYN3ND">
+  
+  (function(d,e,v,s,i,t,E){d['GoogleDevelopersObject']=i;
+    t=e.createElement(v);t.async=1;t.src=s;E=e.getElementsByTagName(v)[0];
+    E.parentNode.insertBefore(t,E);})(window, document, 'script',
+    'https://www.gstatic.com/devrel-devsite/prod/ve828226d17bf98b2ac333a1bbe96ed6401cc6183d543bad39ccac2722acbc6a7/androidsource/js/app_loader.js', '[7,"en",null,"/js/devsite_app_module.js","https://www.gstatic.com/devrel-devsite/prod/ve828226d17bf98b2ac333a1bbe96ed6401cc6183d543bad39ccac2722acbc6a7","https://www.gstatic.com/devrel-devsite/prod/ve828226d17bf98b2ac333a1bbe96ed6401cc6183d543bad39ccac2722acbc6a7/androidsource","https://androidsource-dot-devsite-v2-prod.appspot.com",null,null,["/_pwa/androidsource/manifest.json","https://www.gstatic.com/devrel-devsite/prod/ve828226d17bf98b2ac333a1bbe96ed6401cc6183d543bad39ccac2722acbc6a7/images/video-placeholder.svg","https://www.gstatic.com/devrel-devsite/prod/ve828226d17bf98b2ac333a1bbe96ed6401cc6183d543bad39ccac2722acbc6a7/androidsource/images/favicon.svg","https://www.gstatic.com/devrel-devsite/prod/ve828226d17bf98b2ac333a1bbe96ed6401cc6183d543bad39ccac2722acbc6a7/androidsource/images/lockup.png","https://fonts.googleapis.com/css?family=Google+Sans:400,500,600,700|Google+Sans+Text:400,400italic,500,500italic,600,600italic,700,700italic|Roboto+Mono:400,500,700&display=swap"],1,null,[1,6,8,12,14,17,21,25,50,52,63,70,75,76,80,87,91,92,93,97,98,100,101,102,103,104,105,107,108,109,110,112,113,117,118,120,122,124,125,126,127,129,130,131,132,133,134,135,136,138,140,141,147,148,149,151,152,156,157,158,159,161,163,164,168,169,170,179,180,182,183,186,191,193,196],"REDACTED_PUBLIC_SITE_KEY","REDACTED_PUBLIC_SITE_KEY","source.android.com","REDACTED_PUBLIC_SITE_KEY","REDACTED_PUBLIC_SITE_KEY",null,null,null,["DevPro__enable_google_payments_buyflow","Cloud__enable_cloud_dlp_service","Profiles__enable_purchase_prompts","Profiles__enable_join_program_group_endpoint","DevPro__remove_eu_tax_intake_form","Profiles__enable_user_type","MiscFeatureFlags__enable_appearance_cookies","MiscFeatureFlags__gdp_dashboard_reskin_enabled","Search__enable_ai_search_summaries_for_all","Cloud__enable_free_trial_server_call","MiscFeatureFlags__fix_lower_breadcrumbs","Profiles__enable_completequiz_endpoint","DevPro__enable_credits_banner","Cloud__enable_cloud_shell_fte_user_flow","Profiles__enable_recognition_badges","Profiles__enable_playlist_community_acl","DevPro__enable_enterprise","Analytics__enable_devpro_interaction_logging","TpcFeatures__enable_unmirrored_page_left_nav","Profiles__enable_callout_notifications","MiscFeatureFlags__enable_dark_theme","Search__enable_suggestions_from_borg","Analytics__enable_clearcut_logging","Profiles__enable_targeted_hero","MiscFeatureFlags__enable_variable_operator_index_yaml","Cloud__enable_cloud_shell","Cloud__fast_free_trial","AIStudioInteractionsToggle__interactions_are_default","Cloud__cache_serialized_dynamic_content","DevPro__enable_devsite_captcha","DevPro__enable_embed_profile_creation","MiscFeatureFlags__enable_variable_operator","Profiles__enable_awarding_url","Profiles__enable_developer_profile_benefits_ui_redesign","Profiles__enable_complete_playlist_endpoint","Profiles__enable_page_saving","Profiles__require_profile_eligibility_for_signin","Profiles__enable_developer_profiles_callout","DevPro__enable_nvidia_credits_card","Concierge__enable_actions_menu","DevPro__enable_free_benefits","MiscFeatureFlags__enable_firebase_utm","CloudShell__cloud_shell_button","BookNav__enable_tenant_cache_key","Profiles__enable_dashboard_curated_recommendations","DevPro__enable_g1_integration","MiscFeatureFlags__enable_explicit_template_dependencies","MiscFeatureFlags__enable_framebox_badge_methods","EngEduTelemetry__enable_engedu_telemetry","MiscFeatureFlags__developers_footer_dark_image","MiscFeatureFlags__developers_footer_image","TpcFeatures__proxy_prod_host","Concierge__enable_remove_info_panel_tags","Profiles__enable_public_developer_profiles","Search__enable_dynamic_content_confidential_banner","Search__enable_page_map","MiscFeatureFlags__enable_project_variables","DevPro__enable_vertex_credit_card","Cloud__enable_legacy_calculator_redirect","Profiles__enable_auto_apply_credits","DevPro__enable_firebase_workspaces_card","Search__enable_ai_eligibility_checks","DevPro__enable_cloud_innovators_plus","Profiles__enable_developer_profile_pages_as_content","MiscFeatureFlags__remove_cross_domain_tracking_params","Cloud__enable_cloudx_experiment_ids","CloudShell__cloud_code_overflow_menu","Concierge__enable_pushui","Experiments__reqs_query_experiments","MiscFeatureFlags__enable_explain_this_code","DevPro__enable_code_assist","SignIn__enable_l1_signup_flow","DevPro__enable_google_one_card","Profiles__enable_completecodelab_endpoint","Profiles__enable_stripe_subscription_management","DevPro__enable_g1_ineligible_redirect","Profiles__enable_release_notes_notifications","MiscFeatureFlags__enable_view_transitions","DevPro__enable_developer_subscriptions","DevPro__enable_devpro_offers","Profiles__enable_profile_collections"],null,null,"REDACTED_PUBLIC_SITE_KEY","https://developerscontentserving-pa.googleapis.com","REDACTED_PUBLIC_SITE_KEY","https://developerscontentsearch-pa.googleapis.com",2,4,null,"https://developerprofiles-pa.googleapis.com",[7,"androidsource","Android Open Source Project","source.android.com",null,"androidsource-dot-devsite-v2-prod.appspot.com",null,null,[null,1,null,null,null,null,null,null,null,null,null,[1],null,null,null,null,null,null,[1],[1,null,null,[1]],null,null,null,[1,null,1],null,null,null,null,null,[1],[1]],null,[29,null,null,null,null,null,"/images/lockup.png","/images/touchicon-180.png",null,null,null,null,null,1,null,null,null,null,null,null,null,2,null,null,null,"/images/lockup-dark-theme.png",[]],[],null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,[6,1],null,[[null,null,null,[3,7],null,null,[1,[["docType","Choose a content type",[["Guide",null,null,null,null,null,null,null,null,"Guide"],["ReleaseNotes",null,null,null,null,null,null,null,null,"Release Notes"]]],["category","Choose a topic",[["Architecture",null,null,null,null,null,null,null,null,"Architecture"],["Automotive",null,null,null,null,null,null,null,null,"Automotive"],["AndroidBuilding",null,null,null,null,null,null,null,null,"Building"],["AndroidConnectivity",null,null,null,null,null,null,null,null,"Connectivity"],["Camera",null,null,null,null,null,null,null,null,"Camera"],["Compatibility",null,null,null,null,null,null,null,null,"Compatibility"],["Drivers",null,null,null,null,null,null,null,null,"Drivers"],["Graphics",null,null,null,null,null,null,null,null,"Graphics"],["Media",null,null,null,null,null,null,null,null,"Media"],["Security",null,null,null,null,null,null,null,null,"Security"],["Testing",null,null,null,null,null,null,null,null,"Testing"]]]]]],[1,1],null,1],[[null,null,null,null,null,null,null,[["G-2TQ26MFY2E"],null,null,[["G-2TQ26MFY2E",1]]],null,null,null,null,1]],null,4],null,"pk_live_5170syrHvgGVmSx9sBrnWtA5luvk9BwnVcvIi7HizpwauFG96WedXsuXh790rtij9AmGllqPtMLfhe2RSwD6Pn38V00uBCydV4m",1,null,"https://developerscontentinsights-pa.googleapis.com","REDACTED_PUBLIC_SITE_KEY","REDACTED_PUBLIC_SITE_KEY","https://developers.googleapis.com",null,null,"REDACTED_PUBLIC_SITE_KEY\n",null,null,"https://developers.googleapis.com"]')
+  
+</script>
+
+    <devsite-a11y-announce></devsite-a11y-announce>
+  </body>
+</html>

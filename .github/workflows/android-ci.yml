@@ -1,0 +1,216 @@
+name: Android CI
+
+# Builds, lints and tests the debug variant on every push, pull request and manual run.
+# Release builds live in release.yml (tags). No secrets are needed here.
+on:
+  push:
+    branches: ['**']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# One run per ref. Superseded pull request runs are cancelled; push runs are never
+# cancelled, so every pushed commit (including on main) gets a complete result.
+concurrency:
+  group: android-ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  GRADLE_OPTS: -Dorg.gradle.daemon=false -Dkotlin.compiler.execution.strategy=in-process
+  ANDROID_PLATFORM_PACKAGE: platforms;android-37.0
+  ANDROID_BUILD_TOOLS_PACKAGE: build-tools;37.0.0
+
+jobs:
+  build:
+    name: Lint, unit tests, assemble debug
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0 # full history: versionCode/versionName are derived from the commit count
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      # Also validates gradle/wrapper/gradle-wrapper.jar against known checksums.
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+        with:
+          # Pull requests may read the cache but only trusted refs write it.
+          cache-read-only: ${{ github.ref != 'refs/heads/main' }}
+
+      - name: Set up Android SDK (platform 37, build-tools 37.0.0)
+        uses: android-actions/setup-android@v4
+        with:
+          packages: platform-tools ${{ env.ANDROID_PLATFORM_PACKAGE }} ${{ env.ANDROID_BUILD_TOOLS_PACKAGE }}
+
+      - name: Make Gradle wrapper executable
+        run: chmod +x gradlew
+
+      - name: Lint, unit tests and assemble debug
+        run: ./gradlew lintDebug testDebugUnitTest assembleDebug --stacktrace
+
+      - name: Write build metadata
+        run: |
+          chmod +x scripts/write-build-info.sh
+          mkdir -p dist
+          BUILD_VARIANT=debug scripts/write-build-info.sh dist/build-info.json
+          cp app/build/outputs/apk/debug/app-debug.apk dist/
+
+      - name: Job summary
+        if: always()
+        run: |
+          # shellcheck disable=SC2016
+          {
+            echo '## Android CI'
+            echo
+            if [ -f dist/build-info.json ]; then
+              echo 'Debug APK built. Build metadata:'
+              echo
+              echo '```json'
+              cat dist/build-info.json
+              echo '```'
+            else
+              echo 'The build did not produce an APK. See the job log, the lint report and the unit test report.'
+            fi
+            echo
+            echo 'Artifacts: `Smali-Helper-Plus-Debug` (APK + build-info.json), `lint-reports`, `unit-test-reports`.'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload debug APK
+        uses: actions/upload-artifact@v7
+        with:
+          name: Smali-Helper-Plus-Debug
+          path: |
+            dist/app-debug.apk
+            dist/build-info.json
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Upload lint reports
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: lint-reports
+          path: |
+            app/build/reports/lint-results-debug.html
+            app/build/reports/lint-results-debug.xml
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Upload unit test reports
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: unit-test-reports
+          path: |
+            app/build/reports/tests/testDebugUnitTest/
+            app/build/test-results/
+          if-no-files-found: warn
+          retention-days: 14
+
+  instrumented-tests:
+    name: Instrumented tests (Pixel 6 emulator, API 36)
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      EMULATOR_API_LEVEL: '36'
+      EMULATOR_TARGET: google_apis
+      EMULATOR_ARCH: x86_64
+      EMULATOR_PROFILE: pixel_6
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0 # full history: versionCode/versionName are derived from the commit count
+
+      # Hardware acceleration for the emulator (documented by reactivecircus/android-emulator-runner).
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+        with:
+          cache-read-only: ${{ github.ref != 'refs/heads/main' }}
+
+      - name: Set up Android SDK (platform 37, build-tools 37.0.0)
+        uses: android-actions/setup-android@v4
+        with:
+          packages: platform-tools ${{ env.ANDROID_PLATFORM_PACKAGE }} ${{ env.ANDROID_BUILD_TOOLS_PACKAGE }}
+
+      - name: Make Gradle wrapper executable
+        run: chmod +x gradlew
+
+      - name: Cache AVD
+        id: avd-cache
+        uses: actions/cache@v6
+        with:
+          path: |
+            ~/.android/avd/*
+            ~/.android/adb*
+          key: avd-${{ runner.os }}-api${{ env.EMULATOR_API_LEVEL }}-${{ env.EMULATOR_TARGET }}-${{ env.EMULATOR_ARCH }}-${{ env.EMULATOR_PROFILE }}
+
+      # Boots the emulator once to create the snapshot that is cached for later runs.
+      - name: Create AVD and snapshot
+        if: steps.avd-cache.outputs.cache-hit != 'true'
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ env.EMULATOR_API_LEVEL }}
+          target: ${{ env.EMULATOR_TARGET }}
+          arch: ${{ env.EMULATOR_ARCH }}
+          profile: ${{ env.EMULATOR_PROFILE }}
+          force-avd-creation: false
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: false
+          script: echo "Generated AVD snapshot for caching."
+
+      # No continue-on-error: an emulator that fails to boot, or any failing test, fails the job.
+      - name: Run connectedDebugAndroidTest
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ env.EMULATOR_API_LEVEL }}
+          target: ${{ env.EMULATOR_TARGET }}
+          arch: ${{ env.EMULATOR_ARCH }}
+          profile: ${{ env.EMULATOR_PROFILE }}
+          force-avd-creation: false
+          emulator-boot-timeout: 600
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: true
+          script: ./gradlew connectedDebugAndroidTest --stacktrace
+
+      - name: Job summary
+        if: always()
+        run: |
+          {
+            echo '## Instrumented tests'
+            echo
+            echo "Emulator: profile \`$EMULATOR_PROFILE\`, API $EMULATOR_API_LEVEL, \`$EMULATOR_TARGET\`, \`$EMULATOR_ARCH\`."
+            echo 'Physical Pixel 6 (Android 17) runs are done locally, see docs/TESTING.md.'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload instrumented test reports
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: android-test-reports
+          path: |
+            app/build/reports/androidTests/
+            app/build/outputs/androidTest-results/
+          if-no-files-found: warn
+          retention-days: 14

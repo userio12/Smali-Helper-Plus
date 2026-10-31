@@ -1,0 +1,50 @@
+# Gradle / build output
+.gradle/
+.kotlin/
+/build/
+/app/build/
+**/build/
+!**/src/**/build/
+/captures
+.externalNativeBuild
+.cxx
+/dist/
+
+# Local test output
+/build/pixel6/
+
+# IDE / OS
+.idea/
+*.iml
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Local configuration
+local.properties
+
+# Secrets: never commit these (see SECRETS_SETUP.md)
+.env
+.env.*
+!.env.example
+*.jks
+*.keystore
+*.p12
+*.pfx
+*.pem
+*.key
+*.pk8
+keystore.properties
+signing.properties
+google-services.json
+*credentials*.json
+service-account*.json
+client_secret*.json
+id_rsa*
+id_ed25519*
+
+# Logs and profiling
+*.log
+*.hprof
+*.trace

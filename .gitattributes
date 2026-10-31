@@ -1,0 +1,15 @@
+* text=auto eol=lf
+
+# Gradle wrapper
+gradlew text eol=lf
+*.bat text eol=crlf
+*.jar binary
+
+# Binary assets
+*.png binary
+*.jpg binary
+*.webp binary
+*.ttf binary
+*.otf binary
+*.keystore binary
+*.jks binary
